@@ -3,179 +3,338 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Evan Yibole</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Evan Yibole — Computer Science, George Mason University</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,440;9..144,520&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f8f7f4;
-    --ink: #1c1c1a;
-    --muted: #7a7973;
-    --line: #dedcd4;
-    --accent: #2d4a3e;
+    --bg: #f7f6f1;
+    --paper: #fbfaf7;
+    --ink: #17170f;
+    --muted: #83816f;
+    --line: #e2e0d5;
+    --accent: #24463a;
+    --accent-soft: rgba(36,70,58,0.08);
+    --gold: #a8874f;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
   body {
     background: var(--bg);
     color: var(--ink);
     font-family: 'Inter', sans-serif;
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 15.5px;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+
+  /* faint paper grain */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
   }
 
   @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; transition: none !important; }
-  }
-
-  .wrap {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 5rem 2rem 6rem;
+    * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   }
 
   a { color: inherit; }
 
-  .mono {
-    font-family: 'IBM Plex Mono', monospace;
-    letter-spacing: 0.01em;
+  .mono { font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.01em; }
+
+  /* scroll progress */
+  #progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    width: 0%;
+    background: var(--accent);
+    z-index: 200;
+    transition: width 0.08s linear;
   }
 
+  /* dot nav */
+  #dotnav {
+    position: fixed;
+    right: 2.4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 150;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+  #dotnav a {
+    position: relative;
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--line);
+    border: 1px solid transparent;
+    transition: background 0.25s, transform 0.25s;
+  }
+  #dotnav a:hover { transform: scale(1.3); }
+  #dotnav a.active { background: var(--accent); transform: scale(1.3); }
+  #dotnav a .label {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  #dotnav a:hover .label,
+  #dotnav a.active .label { opacity: 1; }
+
+  @media (max-width: 900px) { #dotnav { display: none; } }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 6rem 2rem 6rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* reveal utility */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s cubic-bezier(.2,.7,.3,1), transform 0.7s cubic-bezier(.2,.7,.3,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* HEADER */
   header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: flex-start;
     flex-wrap: wrap;
-    gap: 1.5rem;
-    margin-bottom: 3.5rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--line);
+    gap: 2rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .mark {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    margin-bottom: 1.6rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.05s;
   }
 
   h1 {
     font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: 2.6rem;
-    letter-spacing: -0.01em;
+    font-weight: 440;
+    font-size: clamp(2.4rem, 6vw, 3.1rem);
+    letter-spacing: -0.015em;
+    line-height: 1.05;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.15s;
   }
 
   .role {
     color: var(--muted);
     font-size: 0.95rem;
-    margin-top: 0.35rem;
+    margin-top: 0.6rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.28s;
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    margin-top: 0.9rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.38s;
+  }
+  .status .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 0 rgba(36,70,58,0.5);
+    animation: pulse 2.4s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(36,70,58,0.35); }
+    70% { box-shadow: 0 0 0 6px rgba(36,70,58,0); }
+    100% { box-shadow: 0 0 0 0 rgba(36,70,58,0); }
   }
 
   .contact {
     text-align: right;
     font-size: 0.82rem;
     color: var(--muted);
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.3s;
   }
   .contact a {
     display: block;
     text-decoration: none;
-    margin-bottom: 0.3rem;
-    transition: color 0.15s;
+    margin-bottom: 0.42rem;
+    transition: color 0.15s, transform 0.15s;
   }
   .contact a:hover { color: var(--accent); }
 
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   .summary {
-    font-size: 1.05rem;
-    line-height: 1.75;
+    font-size: 1.08rem;
+    line-height: 1.8;
     color: var(--ink);
-    max-width: 60ch;
-    margin-bottom: 4rem;
+    max-width: 58ch;
+    margin: 2.6rem 0 4.5rem;
+    padding-top: 2.2rem;
+    border-top: 1px solid var(--line);
   }
   .summary strong { color: var(--accent); font-weight: 500; }
 
-  section { margin-bottom: 3.5rem; }
+  section { margin-bottom: 4rem; scroll-margin-top: 3rem; }
 
   .section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.72rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 1.6rem;
+    margin-bottom: 1.8rem;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
   }
 
   .row {
     display: grid;
-    grid-template-columns: 110px 1fr;
-    gap: 1.5rem;
-    padding: 1.4rem 0;
+    grid-template-columns: 112px 1fr;
+    gap: 1.6rem;
+    padding: 1.7rem 1rem;
+    margin: 0 -1rem;
     border-top: 1px solid var(--line);
+    border-radius: 8px;
+    transition: background 0.3s;
   }
+  .row:hover { background: var(--paper); }
+  section .row:last-child { border-bottom: 1px solid var(--line); }
 
   .row-date {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.75rem;
     color: var(--muted);
-    padding-top: 0.15rem;
+    padding-top: 0.2rem;
+    transition: color 0.3s;
   }
+  .row:hover .row-date { color: var(--accent); }
 
   .row-title {
     font-family: 'Fraunces', serif;
-    font-size: 1.15rem;
+    font-size: 1.18rem;
     font-weight: 500;
+    letter-spacing: -0.005em;
   }
   .row-org {
     font-size: 0.88rem;
     color: var(--accent);
-    margin-top: 0.1rem;
-    margin-bottom: 0.7rem;
+    margin-top: 0.15rem;
+    margin-bottom: 0.9rem;
   }
-  .row-org a { text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.15s; }
-  .row-org a:hover { border-color: var(--accent); }
 
   .row ul {
     list-style: none;
     color: var(--muted);
-    font-size: 0.92rem;
-    line-height: 1.7;
+    font-size: 0.93rem;
+    line-height: 1.75;
   }
-  .row ul li { position: relative; padding-left: 1rem; margin-bottom: 0.35rem; }
-  .row ul li::before { content: '–'; position: absolute; left: 0; }
+  .row ul li { position: relative; padding-left: 1.05rem; margin-bottom: 0.4rem; }
+  .row ul li::before { content: '·'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
 
   .stack {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-top: 0.9rem;
+    gap: 0.45rem;
+    margin-top: 1.1rem;
   }
   .stack span {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.68rem;
+    font-size: 0.67rem;
     color: var(--muted);
-    padding: 0.15rem 0.5rem;
+    padding: 0.22rem 0.6rem;
     border: 1px solid var(--line);
-    border-radius: 3px;
+    border-radius: 20px;
+    background: var(--paper);
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
   }
+  .row:hover .stack span { border-color: #cfcdc0; }
+  .stack span:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-1px); }
 
-  .row-links { margin-top: 0.8rem; }
+  .row-links { margin-top: 1rem; }
   .row-links a {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.75rem;
     text-decoration: none;
     color: var(--ink);
-    border-bottom: 1px solid var(--accent);
-    padding-bottom: 1px;
+    padding-bottom: 2px;
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 100% 1px;
+    transition: color 0.2s;
   }
   .row-links a:hover { color: var(--accent); }
 
   .badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--accent);
-    margin-left: 0.6rem;
+    font-size: 0.66rem;
+    color: var(--gold);
+    margin-left: 0.7rem;
+    padding: 0.15rem 0.55rem;
+    border: 1px solid rgba(168,135,79,0.35);
+    border-radius: 20px;
+    vertical-align: middle;
   }
 
   .skills {
     display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: 0.9rem 1.5rem;
-    font-size: 0.9rem;
+    grid-template-columns: 150px 1fr;
+    row-gap: 1.1rem;
+    column-gap: 1.5rem;
+    font-size: 0.92rem;
+    padding-top: 0.2rem;
   }
   .skills dt {
     font-family: 'IBM Plex Mono', monospace;
@@ -188,46 +347,70 @@
   .leader-line {
     display: flex;
     justify-content: space-between;
-    padding: 0.85rem 0;
+    align-items: baseline;
+    padding: 1rem 0;
     border-top: 1px solid var(--line);
-    font-size: 0.92rem;
+    font-size: 0.93rem;
     gap: 1rem;
+    transition: padding-left 0.25s;
   }
+  .leader-line:hover { padding-left: 0.4rem; }
   .leader-line:last-child { border-bottom: 1px solid var(--line); }
+  .leader-line .leader-role { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 440; }
   .leader-line .leader-date {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.75rem;
+    font-size: 0.73rem;
     color: var(--muted);
     white-space: nowrap;
   }
 
   footer {
-    margin-top: 4rem;
-    padding-top: 2rem;
+    margin-top: 5rem;
+    padding-top: 2.2rem;
     border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.72rem;
     color: var(--muted);
   }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--accent); }
 
   @media (max-width: 560px) {
-    .wrap { padding: 3rem 1.3rem 4rem; }
-    h1 { font-size: 2rem; }
+    .wrap { padding: 4rem 1.3rem 4rem; }
+    h1 { font-size: 2.1rem; }
     header { flex-direction: column; align-items: flex-start; }
     .contact { text-align: left; }
-    .row { grid-template-columns: 1fr; gap: 0.4rem; }
+    .row { grid-template-columns: 1fr; gap: 0.5rem; padding: 1.4rem 0; margin: 0; }
     .row-date { padding-top: 0; }
   }
 </style>
 </head>
 <body>
 
+<div id="progress"></div>
+
+<nav id="dotnav">
+  <a href="#experience" data-label="Experience"><span class="label">Experience</span></a>
+  <a href="#education" data-label="Education"><span class="label">Education</span></a>
+  <a href="#projects" data-label="Projects"><span class="label">Projects</span></a>
+  <a href="#skills" data-label="Skills"><span class="label">Skills</span></a>
+  <a href="#leadership" data-label="Leadership"><span class="label">Leadership</span></a>
+</nav>
+
 <div class="wrap">
+
+  <div class="mark">EY</div>
 
   <header>
     <div>
       <h1>Evan Yibole</h1>
       <p class="role">Computer Science · George Mason University</p>
+      <p class="status"><span class="dot"></span> Open to software engineering opportunities</p>
     </div>
     <div class="contact mono">
       <a href="mailto:fyibole@gmu.edu">fyibole@gmu.edu</a>
@@ -237,14 +420,14 @@
     </div>
   </header>
 
-  <p class="summary">
+  <p class="summary reveal">
     Computer Science student at George Mason University with a <strong>3.82 GPA</strong> and software
     engineering experience across fullstack web applications, backend APIs, and AI-powered systems.
   </p>
 
-  <section>
-    <p class="section-title">Experience</p>
-    <div class="row">
+  <section id="experience">
+    <p class="section-title reveal">Experience</p>
+    <div class="row reveal">
       <div class="row-date mono">May 2026 —<br>Aug 2026</div>
       <div>
         <div class="row-title">Software Engineering Intern</div>
@@ -261,9 +444,9 @@
     </div>
   </section>
 
-  <section>
-    <p class="section-title">Education</p>
-    <div class="row">
+  <section id="education">
+    <p class="section-title reveal">Education</p>
+    <div class="row reveal">
       <div class="row-date mono">Expected<br>May 2029</div>
       <div>
         <div class="row-title">B.S. in Computer Science</div>
@@ -276,10 +459,10 @@
     </div>
   </section>
 
-  <section>
-    <p class="section-title">Projects</p>
+  <section id="projects">
+    <p class="section-title reveal">Projects</p>
 
-    <div class="row">
+    <div class="row reveal">
       <div class="row-date mono">2026</div>
       <div>
         <div class="row-title">Avelamed <span class="badge">🏅 Honorable Mention</span></div>
@@ -293,7 +476,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row reveal">
       <div class="row-date mono">2026</div>
       <div>
         <div class="row-title">Study Planner</div>
@@ -309,9 +492,9 @@
     </div>
   </section>
 
-  <section>
-    <p class="section-title">Technical Skills</p>
-    <dl class="skills">
+  <section id="skills">
+    <p class="section-title reveal">Technical Skills</p>
+    <dl class="skills reveal">
       <dt>Languages</dt>
       <dd>Java, Python, JavaScript, TypeScript, SQL, HTML/CSS</dd>
       <dt>Frameworks</dt>
@@ -323,27 +506,67 @@
     </dl>
   </section>
 
-  <section>
-    <p class="section-title">Leadership & Activities</p>
-    <div class="leader-line">
-      <span>Google Developer Student Club</span>
+  <section id="leadership">
+    <p class="section-title reveal">Leadership & Activities</p>
+    <div class="leader-line reveal">
+      <span class="leader-role">Google Developer Student Club</span>
       <span class="leader-date">Sep 2025 – May 2026</span>
     </div>
-    <div class="leader-line">
-      <span>Game Development Club</span>
+    <div class="leader-line reveal">
+      <span class="leader-role">Game Development Club</span>
       <span class="leader-date">Sep 2025 – May 2026</span>
     </div>
-    <div class="leader-line">
-      <span>Treasurer & Logistics Coordinator — Student Clothing Venture</span>
+    <div class="leader-line reveal">
+      <span class="leader-role">Treasurer & Logistics Coordinator — Student Clothing Venture</span>
       <span class="leader-date">Feb 2023 – May 2025</span>
     </div>
   </section>
 
   <footer>
-    evan yibole · fyibole@gmu.edu
+    <span>evan yibole · fyibole@gmu.edu</span>
+    <a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Back to top ↑</a>
   </footer>
 
 </div>
+
+<script>
+  // scroll progress
+  const progress = document.getElementById('progress');
+  function updateProgress() {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progress.style.width = scrolled + '%';
+  }
+  document.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 40);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => revealObserver.observe(el));
+
+  // dot nav active state
+  const dotLinks = document.querySelectorAll('#dotnav a');
+  const sections = Array.from(dotLinks).map(a => document.querySelector(a.getAttribute('href')));
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const idx = sections.indexOf(entry.target);
+      if (idx === -1) return;
+      if (entry.isIntersecting) {
+        dotLinks.forEach(l => l.classList.remove('active'));
+        dotLinks[idx].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  sections.forEach(s => s && navObserver.observe(s));
+</script>
 
 </body>
 </html>

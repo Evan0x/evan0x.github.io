@@ -3,497 +3,128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Evan Yibole — Computer Science, George Mason University</title>
+<title>Evan Yibole — Computer Science</title>
+<meta name="description" content="Evan Yibole is a computer science student at George Mason University building fullstack products and retrieval systems. Open to software engineering opportunities.">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,440;0,9..144,560;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #14110d;
-    --paper: #1a1712;
-    --ink: #f2ece0;
-    --muted: #a79c88;
-    --faint: #6f6656;
+    --paper: #1c1813;
+    --ink: #f3eee4;
+    --body: #c9bfae;
+    --muted: #a89c88;
+    --faint: #8a7d6a;
     --line: #322c22;
+    --line-strong: #4a4032;
     --accent: #c9a869;
-    --accent-dim: rgba(201,168,105,0.14);
+    --accent-dim: rgba(201, 168, 105, 0.16);
+    --header: 4.25rem;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: env(safe-area-inset-top, 0px); }
-
-  @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header) + env(safe-area-inset-top, 0px));
   }
-
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
   body {
     background: var(--bg);
     color: var(--ink);
-    font-family: 'Inter', sans-serif;
-    font-size: 15.5px;
-    line-height: 1.7;
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
-    position: relative;
-    padding-top: env(safe-area-inset-top, 0px);
+    padding-top: calc(var(--header) + env(safe-area-inset-top, 0px));
     padding-bottom: env(safe-area-inset-bottom, 0px);
     background-image:
-      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(201,168,105,0.06), transparent 60%);
+      radial-gradient(ellipse 980px 520px at 8% -8%, rgba(201, 168, 105, 0.07), transparent 58%),
+      radial-gradient(ellipse 640px 420px at 100% 18%, rgba(201, 168, 105, 0.035), transparent 50%);
   }
-
   a { color: inherit; }
-  a:focus-visible, button:focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
-
-  .serif { font-family: 'Fraunces', serif; }
-  .serif-i { font-family: 'Fraunces', serif; font-style: italic; }
-
+  a:focus-visible, button:focus-visible {
+    outline: 1px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .skip {
+    position: absolute;
+    left: 1rem;
+    top: 0.6rem;
+    transform: translateY(-140%);
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.45rem 0.75rem;
+    z-index: 300;
+    font-size: 0.85rem;
+  }
+  .skip:focus { transform: none; }
   #progress {
     position: fixed;
-    top: 0; left: 0;
-    height: 1px;
+    top: 0;
+    left: 0;
+    height: 2px;
     width: 0%;
     background: var(--accent);
-    z-index: 200;
-    transition: width 0.08s linear;
+    z-index: 220;
   }
-
-  #dotnav {
+  .top {
     position: fixed;
-    right: 2.6rem;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 150;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 180;
+    height: calc(var(--header) + env(safe-area-inset-top, 0px));
+    padding-top: env(safe-area-inset-top, 0px);
     display: flex;
-    flex-direction: column;
-    gap: 1.3rem;
-    align-items: flex-end;
-  }
-  #dotnav a {
-    position: relative;
-    display: block;
-    width: 12px;
-    height: 1px;
-    background: var(--faint);
-    transition: width 0.3s, background 0.3s;
-  }
-  #dotnav a:hover, #dotnav a.active { width: 22px; background: var(--accent); }
-  #dotnav a .label {
-    position: absolute;
-    right: 30px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 0.78rem;
-    color: var(--muted);
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-  }
-  #dotnav a:hover .label, #dotnav a.active .label { opacity: 1; }
-
-  @media (max-width: 900px) { #dotnav { display: none; } }
-
-  .wrap {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 7rem 2rem 6rem;
-    position: relative;
-    z-index: 2;
-  }
-
-  .reveal { opacity: 0; transform: translateY(10px); transition: opacity 0.9s ease, transform 0.9s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 2rem;
-    padding-bottom: 2.6rem;
+    align-items: center;
+    background: rgba(20, 17, 13, 0.86);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--line);
-    margin-bottom: 2.6rem;
   }
-
-  .kicker {
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    color: var(--faint);
-    margin-bottom: 1.2rem;
+  .top-inner {
+    width: min(1080px, calc(100% - 3rem));
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
   }
-
-  h1 {
-    font-family: 'Fraunces', serif;
+  .brand {
+    font-family: Fraunces, Georgia, serif;
     font-style: italic;
-    font-weight: 440;
-    font-size: clamp(2.5rem, 6vw, 3.4rem);
+    font-weight: 500;
+    font-size: 1.05rem;
+    text-decoration: none;
     letter-spacing: -0.01em;
-    line-height: 1;
-    color: var(--ink);
   }
-
-  .role {
-    color: var(--muted);
-    font-size: 0.98rem;
-    margin-top: 0.75rem;
-  }
-
-  .status {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    font-size: 0.82rem;
-    color: var(--accent);
-    margin-top: 1.1rem;
-  }
-  .status .dot {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 0 0 rgba(201,168,105,0.45);
-    animation: pulse 2.6s infinite;
-  }
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(201,168,105,0.35); }
-    70% { box-shadow: 0 0 0 7px rgba(201,168,105,0); }
-    100% { box-shadow: 0 0 0 0 rgba(201,168,105,0); }
-  }
-
-  .contact {
-    text-align: right;
-    font-size: 0.86rem;
-    color: var(--muted);
+  .nav {
     display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
+    align-items: center;
+    gap: 1.35rem;
   }
-  .contact a {
+  .nav a {
     text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    padding: 0.35rem 0;
     border-bottom: 1px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
-    padding-bottom: 1px;
   }
-  .contact a:hover { color: var(--accent); border-color: var(--accent); }
-
-  .summary {
-    font-family: 'Fraunces', serif;
-    font-weight: 340;
-    font-size: 1.32rem;
-    line-height: 1.62;
+  .nav a:hover,
+  .nav a[aria-current="true"] {
     color: var(--ink);
-    max-width: 34ch;
-    margin: 0 0 5rem;
+    border-color: var(--accent);
   }
-  .summary em {
-    font-style: italic;
-    color: var(--accent);
+  .wrap {
+    width: min(1080px, calc(100% - 3rem));
+    margin: 0 auto;
   }
-
-  section { margin-bottom: 4.6rem; scroll-margin-top: 3rem; }
-
-  .section-title {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 1.5rem;
-    font-weight: 440;
-    color: var(--ink);
-    margin-bottom: 0.5rem;
-  }
-  .section-rule {
-    width: 44px;
-    height: 1px;
-    background: var(--accent);
-    margin-bottom: 2.2rem;
-  }
-
-  .row {
-    display: grid;
-    grid-template-columns: 130px 1fr;
-    gap: 1.8rem;
-    padding: 2rem 0;
-    border-top: 1px solid var(--line);
-  }
-  section .row:last-child { border-bottom: 1px solid var(--line); }
-
-  .row-date {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 0.86rem;
-    color: var(--faint);
-    padding-top: 0.15rem;
-  }
-
-  .row-title { font-size: 1.08rem; font-weight: 600; color: var(--ink); }
-  .row-org { font-size: 0.9rem; color: var(--accent); margin-top: 0.2rem; margin-bottom: 1.1rem; }
-
-  .row ul { list-style: none; color: var(--muted); font-size: 0.94rem; line-height: 1.8; }
-  .row ul li { position: relative; padding-left: 1rem; margin-bottom: 0.45rem; }
-  .row ul li::before { content: '—'; position: absolute; left: 0; color: var(--faint); }
-
-  .stack {
-    font-size: 0.82rem;
-    color: var(--faint);
-    margin-top: 1.2rem;
-    font-style: italic;
-    font-family: 'Fraunces', serif;
-  }
-
-  .row-links { margin-top: 1.1rem; }
-  .row-links a {
-    font-size: 0.85rem;
-    text-decoration: none;
-    color: var(--ink);
-    border-bottom: 1px solid var(--accent);
-    padding-bottom: 2px;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .row-links a:hover { color: var(--accent); }
-
-  .badge {
-    display: inline-block;
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 0.8rem;
-    color: var(--accent);
-    margin-left: 0.6rem;
-  }
-  .badge::before { content: '· '; color: var(--faint); font-style: normal; }
-
-  .skills {
-    display: grid;
-    grid-template-columns: 150px 1fr;
-    row-gap: 1.4rem;
-    column-gap: 1.5rem;
-    font-size: 0.94rem;
-    padding-top: 0.2rem;
-  }
-  .skills dt {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 0.94rem;
-    color: var(--faint);
-    padding-top: 0.05rem;
-  }
-  .skills dd { color: var(--muted); }
-
-  .leader-line {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 1.15rem 0;
-    border-top: 1px solid var(--line);
-    font-size: 0.94rem;
-    gap: 1rem;
-  }
-  .leader-line:last-child { border-bottom: 1px solid var(--line); }
-  .leader-line .leader-role { color: var(--ink); }
-  .leader-line .leader-date {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 0.84rem;
-    color: var(--faint);
-    white-space: nowrap;
-  }
-
-  footer {
-    margin-top: 5.5rem;
-    padding-top: 2.4rem;
-    border-top: 1px solid var(--line);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    font-size: 0.82rem;
-    color: var(--faint);
-  }
-  footer a { text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
-  footer a:hover { color: var(--accent); border-color: var(--accent); }
-
-  @media (max-width: 560px) {
-    .wrap { padding: 5rem 1.4rem 4rem; }
-    header { flex-direction: column; align-items: flex-start; }
-    .contact { text-align: left; align-items: flex-start; }
-    .row { grid-template-columns: 1fr; gap: 0.6rem; padding: 1.6rem 0; }
-    .summary { font-size: 1.15rem; max-width: none; }
-  }
-</style>
-</head>
-<body>
-
-<div id="progress"></div>
-
-<nav id="dotnav">
-  <a href="#experience"><span class="label">Experience</span></a>
-  <a href="#education"><span class="label">Education</span></a>
-  <a href="#projects"><span class="label">Projects</span></a>
-  <a href="#skills"><span class="label">Skills</span></a>
-  <a href="#leadership"><span class="label">Leadership</span></a>
-</nav>
-
-<div class="wrap">
-
-  <header class="reveal">
-    <div>
-      <p class="kicker">Curriculum Vitae</p>
-      <h1>Evan Yibole</h1>
-      <p class="role">Computer Science, George Mason University</p>
-      <p class="status"><span class="dot"></span> Open to software engineering opportunities</p>
-    </div>
-    <div class="contact">
-      <a href="mailto:fyibole@gmu.edu">fyibole@gmu.edu</a>
-      <a href="tel:+12024397565">+1 (202) 439-7565</a>
-      <a href="https://github.com/Evan0x" target="_blank">github.com/Evan0x</a>
-      <a href="https://www.linkedin.com/in/evan-yibole-675673381/" target="_blank">LinkedIn</a>
-    </div>
-  </header>
-
-  <p class="summary reveal">
-    A computer science student building fullstack and AI-powered systems, with a <em>3.82</em> GPA at George Mason University.
-  </p>
-
-  <section id="experience">
-    <p class="section-title reveal">Experience</p>
-    <div class="section-rule reveal"></div>
-    <div class="row reveal">
-      <div class="row-date">May — Aug<br>2026</div>
-      <div>
-        <div class="row-title">Software Engineering Intern</div>
-        <div class="row-org">Knobull</div>
-        <ul>
-          <li>Enhanced frontend accessibility and search UX, improving loading feedback and error recovery for an AI-powered course recommendation platform.</li>
-          <li>Consolidated backend API calls, reducing request latency by 15% and improving application performance.</li>
-          <li>Built a robust batch-embedding data pipeline to improve reliability and scalability of AI-powered course recommendations.</li>
-        </ul>
-        <div class="stack">React · TypeScript · Node.js · REST APIs · Git · SQL · Embeddings</div>
-        <div class="row-links"><a href="https://knobull.com" target="_blank">knobull.com</a></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="education">
-    <p class="section-title reveal">Education</p>
-    <div class="section-rule reveal"></div>
-    <div class="row reveal">
-      <div class="row-date">Expected<br>May 2029</div>
-      <div>
-        <div class="row-title">B.S. in Computer Science</div>
-        <div class="row-org">George Mason University, Fairfax, VA</div>
-        <ul>
-          <li>GPA: 3.82 / 4.0</li>
-          <li>Relevant coursework: OOP, Discrete Mathematics, Data Structures and Algorithms, Web Programming</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <p class="section-title reveal">Projects</p>
-    <div class="section-rule reveal"></div>
-
-    <div class="row reveal">
-      <div class="row-date">2026</div>
-      <div>
-        <div class="row-title">Avelamed <span class="badge">Honorable Mention</span></div>
-        <div class="row-org">Health Tech Hackathon, AugieHack</div>
-        <ul>
-          <li>Earned Honorable Mention in a health-focused track by developing and shipping a healthcare web application under a tight deadline.</li>
-          <li>Led backend development while collaborating with teammates on UI design, implementing core user workflows and API functionality.</li>
-        </ul>
-        <div class="stack">JavaScript · Node.js · Express</div>
-        <div class="row-links"><a href="https://avelamed.vercel.app/" target="_blank">Live demo</a></div>
-      </div>
-    </div>
-
-    <div class="row reveal">
-      <div class="row-date">2026</div>
-      <div>
-        <div class="row-title">Study Planner</div>
-        <div class="row-org">Personal Project</div>
-        <ul>
-          <li>Built a full-stack academic planner supporting task scheduling, class management, and goal tracking through a responsive web interface.</li>
-          <li>Implemented user authentication with bcrypt password hashing and Google OAuth using Passport.js.</li>
-          <li>Implemented client-side state persistence to preserve planner data across page navigation.</li>
-        </ul>
-        <div class="stack">JavaScript · Node.js · Express · MongoDB</div>
-        <div class="row-links"><a href="https://github.com/Evan0x/study-planner" target="_blank">GitHub</a></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="skills">
-    <p class="section-title reveal">Technical Skills</p>
-    <div class="section-rule reveal"></div>
-    <dl class="skills reveal">
-      <dt>Languages</dt>
-      <dd>Java, Python, JavaScript, TypeScript, SQL, HTML/CSS</dd>
-      <dt>Frameworks</dt>
-      <dd>React, Node.js, Express, Passport.js, Pandas, Matplotlib, NumPy</dd>
-      <dt>Databases</dt>
-      <dd>MongoDB, Supabase</dd>
-      <dt>Tools</dt>
-      <dd>Git, GitHub, Jupyter Notebook</dd>
-    </dl>
-  </section>
-
-  <section id="leadership">
-    <p class="section-title reveal">Leadership &amp; Activities</p>
-    <div class="section-rule reveal"></div>
-    <div class="leader-line reveal">
-      <span class="leader-role">Google Developer Student Club</span>
-      <span class="leader-date">Sep 2025 – May 2026</span>
-    </div>
-    <div class="leader-line reveal">
-      <span class="leader-role">Game Development Club</span>
-      <span class="leader-date">Sep 2025 – May 2026</span>
-    </div>
-    <div class="leader-line reveal">
-      <span class="leader-role">Treasurer &amp; Logistics Coordinator, Student Clothing Venture</span>
-      <span class="leader-date">Feb 2023 – May 2025</span>
-    </div>
-  </section>
-
-  <footer>
-    <span>Evan Yibole · fyibole@gmu.edu</span>
-    <a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Back to top</a>
-  </footer>
-
-</div>
-
-<script>
-  const progress = document.getElementById('progress');
-  function updateProgress() {
-    const h = document.documentElement;
-    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-    progress.style.width = scrolled + '%';
-  }
-  document.addEventListener('scroll', updateProgress, { passive: true });
-  updateProgress();
-
-  const reveals = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 35);
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => revealObserver.observe(el));
-
-  const dotLinks = document.querySelectorAll('#dotnav a');
-  const sections = Array.from(dotLinks).map(a => document.querySelector(a.getAttribute('href')));
-  const navObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const idx = sections.indexOf(entry.target);
-      if (idx === -1) return;
-      if (entry.isIntersecting) {
-        dotLinks.forEach(l => l.classList.remove('active'));
-        dotLinks[idx].classList.add('active');
-      }
-    });
-  }, { rootMargin: '-45% 0px -45% 0px' });
-  sections.forEach(s => s && navObserver.observe(s));
-</script>
-
-</body>
-</html>
+  .js .reveal {

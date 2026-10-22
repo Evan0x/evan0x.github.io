@@ -23,11 +23,14 @@
     --accent-dim: rgba(201, 168, 105, 0.16);
     --header: 4.25rem;
   }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
   html {
     scroll-behavior: smooth;
     scroll-padding-top: calc(var(--header) + env(safe-area-inset-top, 0px));
   }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after {
@@ -35,6 +38,7 @@
       transition: none !important;
     }
   }
+
   body {
     background: var(--bg);
     color: var(--ink);
@@ -48,11 +52,13 @@
       radial-gradient(ellipse 980px 520px at 8% -8%, rgba(201, 168, 105, 0.07), transparent 58%),
       radial-gradient(ellipse 640px 420px at 100% 18%, rgba(201, 168, 105, 0.035), transparent 50%);
   }
+
   a { color: inherit; }
   a:focus-visible, button:focus-visible {
     outline: 1px solid var(--accent);
     outline-offset: 3px;
   }
+
   .skip {
     position: absolute;
     left: 1rem;
@@ -65,6 +71,7 @@
     font-size: 0.85rem;
   }
   .skip:focus { transform: none; }
+
   #progress {
     position: fixed;
     top: 0;
@@ -74,6 +81,7 @@
     background: var(--accent);
     z-index: 220;
   }
+
   .top {
     position: fixed;
     top: 0;
@@ -89,6 +97,7 @@
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--line);
   }
+
   .top-inner {
     width: min(1080px, calc(100% - 3rem));
     margin: 0 auto;
@@ -97,6 +106,7 @@
     justify-content: space-between;
     gap: 1.5rem;
   }
+
   .brand {
     font-family: Fraunces, Georgia, serif;
     font-style: italic;
@@ -105,11 +115,13 @@
     text-decoration: none;
     letter-spacing: -0.01em;
   }
+
   .nav {
     display: flex;
     align-items: center;
     gap: 1.35rem;
   }
+
   .nav a {
     text-decoration: none;
     font-size: 0.82rem;
@@ -123,8 +135,587 @@
     color: var(--ink);
     border-color: var(--accent);
   }
+
   .wrap {
     width: min(1080px, calc(100% - 3rem));
     margin: 0 auto;
   }
+
   .js .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .js .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero {
+    padding: clamp(3.2rem, 9vh, 6.5rem) 0 4.2rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .kicker {
+    font-size: 0.74rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 1.35rem;
+  }
+  .kicker span + span::before { content: " · "; }
+
+  h1 {
+    font-family: Fraunces, Georgia, serif;
+    font-style: italic;
+    font-weight: 440;
+    font-size: clamp(3.4rem, 8.4vw, 6.4rem);
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+  }
+
+  .deck {
+    font-family: Fraunces, Georgia, serif;
+    font-weight: 340;
+    font-size: clamp(1.28rem, 2.2vw, 1.7rem);
+    line-height: 1.45;
+    max-width: 22em;
+    margin-top: 1.7rem;
+    color: var(--ink);
+  }
+  .deck em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 1.55rem;
+    font-size: 0.86rem;
+    color: var(--accent);
+  }
+  .status .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 0 rgba(201, 168, 105, 0.45);
+    animation: pulse 2.6s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(201, 168, 105, 0.4); }
+    70% { box-shadow: 0 0 0 8px rgba(201, 168, 105, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(201, 168, 105, 0); }
+  }
+
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 1.4rem;
+    margin-top: 1.7rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .facts span { position: relative; }
+  .facts span + span::before {
+    content: "";
+    position: absolute;
+    left: -0.78rem;
+    top: 0.55em;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--line-strong);
+  }
+
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.35rem;
+    list-style: none;
+    margin-top: 2.1rem;
+    font-size: 0.92rem;
+  }
+  .contact a {
+    text-decoration: none;
+    color: var(--body);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .contact a:hover { color: var(--accent); border-color: var(--accent); }
+
+  section { padding: 5rem 0; }
+  section + section { border-top: 1px solid var(--line); }
+
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 2.2rem;
+  }
+  .section-title {
+    font-family: Fraunces, Georgia, serif;
+    font-style: italic;
+    font-weight: 440;
+    font-size: clamp(1.8rem, 3vw, 2.35rem);
+    letter-spacing: -0.02em;
+  }
+  .section-note {
+    font-family: Fraunces, Georgia, serif;
+    font-style: italic;
+    color: var(--faint);
+    font-size: 0.95rem;
+  }
+
+  .feature {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.85fr) 1.3fr;
+    gap: 2rem 3rem;
+    padding: 2rem 0 2.2rem;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    margin-bottom: 0.85rem;
+  }
+  .num {
+    font-family: Fraunces, Georgia, serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 1rem;
+  }
+  .when {
+    color: var(--faint);
+    font-size: 0.84rem;
+  }
+
+  .project h3,
+  .role-title {
+    font-size: 1.55rem;
+    font-weight: 560;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  .org {
+    margin-top: 0.35rem;
+    color: var(--accent);
+    font-size: 0.92rem;
+  }
+  .lede {
+    font-family: Fraunces, Georgia, serif;
+    font-weight: 340;
+    font-size: 1.28rem;
+    line-height: 1.4;
+    margin: 0.85rem 0 1rem;
+    max-width: 22em;
+  }
+  .prose {
+    color: var(--body);
+    max-width: 62ch;
+  }
+  .prose + .prose { margin-top: 0.85rem; }
+
+  .stack {
+    margin-top: 1.25rem;
+    font-family: Fraunces, Georgia, serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--faint);
+  }
+
+  .text-link {
+    display: inline-block;
+    margin-top: 1.15rem;
+    text-decoration: none;
+    color: var(--ink);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+    font-size: 0.92rem;
+    transition: color 0.2s;
+  }
+  .text-link:hover { color: var(--accent); }
+  .links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+  }
+
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 1.55rem 1.45rem 1.45rem;
+    min-height: 100%;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .card:hover { border-color: #5c5140; background: #211c16; }
+  .card h3 { font-size: 1.28rem; }
+  .card .lede {
+    font-size: 1.08rem;
+    margin-top: 0.7rem;
+  }
+  .card .prose { font-size: 0.95rem; }
+  .badge {
+    font-family: Fraunces, Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.86rem;
+    color: var(--accent);
+    margin-left: 0.45rem;
+  }
+
+  .entry {
+    display: grid;
+    grid-template-columns: 168px 1fr;
+    gap: 1.5rem 2.4rem;
+    padding: 2.1rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .entry:last-child { border-bottom: 1px solid var(--line); }
+
+  .entry-date {
+    font-family: Fraunces, Georgia, serif;
+    font-style: italic;
+    color: var(--faint);
+    font-size: 0.95rem;
+    padding-top: 0.28rem;
+  }
+  .entry .role-title { font-size: 1.22rem; }
+  .entry .lede { font-size: 1.16rem; max-width: 36em; }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 2.5rem 4rem;
+    padding-bottom: 2.6rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .about-grid h3 {
+    font-family: Fraunces, Georgia, serif;
+    font-style: italic;
+    font-weight: 440;
+    font-size: 1.25rem;
+    margin-bottom: 0.7rem;
+  }
+  .about-grid p { color: var(--body); max-width: 46ch; }
+  .about-grid .meta {
+    margin-top: 0.85rem;
+    color: var(--muted);
+    font-size: 0.94rem;
+  }
+  .activities {
+    list-style: none;
+    color: var(--body);
+  }
+  .activities li {
+    padding: 0.55rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .activities li:last-child { border-bottom: 1px solid var(--line); }
+
+  .skills {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 3rem;
+    margin-top: 2.2rem;
+  }
+  .skills div { min-width: 0; }
+  .skills dt {
+    font-family: Fraunces, Georgia, serif;
+    font-style: italic;
+    color: var(--faint);
+    font-size: 0.98rem;
+    margin-bottom: 0.3rem;
+  }
+  .skills dd { color: var(--body); font-size: 0.96rem; }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 2rem 0 3rem;
+  }
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    color: var(--faint);
+    font-size: 0.88rem;
+  }
+  .foot a {
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .foot a:hover { color: var(--accent); border-color: var(--accent); }
+
+  @media (max-width: 800px) {
+    .top-inner, .wrap { width: min(1080px, calc(100% - 2.2rem)); }
+    .nav { gap: 0.95rem; }
+    .feature,
+    .project-grid,
+    .entry,
+    .about-grid,
+    .skills { grid-template-columns: 1fr; }
+    .feature { gap: 0.4rem; }
+    .entry { gap: 0.45rem; padding: 1.7rem 0; }
+    .section-note { display: none; }
+    section { padding: 3.6rem 0; }
+    .card .lede { max-width: none; }
+  }
+
+  @media (max-width: 520px) {
+    .nav { gap: 0.75rem; }
+    .nav a { font-size: 0.78rem; }
+    .brand { font-size: 0.98rem; }
+    h1 { font-size: 3.05rem; }
+    .kicker { letter-spacing: 0.08em; font-size: 0.68rem; }
+    .kicker span { display: block; }
+    .kicker span + span::before { content: none; }
+    .contact { flex-direction: column; align-items: flex-start; gap: 0.55rem; }
+  }
+
+  @media print {
+    body {
+      background: #fff;
+      color: #1a1612;
+      padding-top: 0;
+    }
+    #progress, .top, .skip, .status .dot { display: none; }
+    .deck, .prose, .about-grid p, .skills dd, .activities { color: #2a241c; }
+    .card { background: #fff; border-color: #ccc; }
+    a { text-decoration: underline; }
+  }
+</style>
+<script>
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.documentElement.classList.add("js");
+  }
+</script>
+</head>
+<body>
+
+<a class="skip" href="#work">Skip to work</a>
+<div id="progress" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="#top">Evan Yibole</a>
+    <nav class="nav" aria-label="Page">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <header class="hero">
+      <p class="kicker"><span>Computer Science</span><span>George Mason University</span></p>
+      <h1>Evan Yibole</h1>
+      <p class="deck">
+        I build fullstack products and the systems under them —
+        <em>search, care plans, and software with a real user on the other side.</em>
+      </p>
+      <p class="status"><span class="dot" aria-hidden="true"></span> Open to software engineering opportunities</p>
+      <p class="facts">
+        <span>3.82 GPA</span>
+        <span>Expected May 2029</span>
+        <span>Fairfax, VA</span>
+      </p>
+      <ul class="contact">
+        <li><a href="mailto:fyibole@gmu.edu">fyibole@gmu.edu</a></li>
+        <li><a href="tel:+12024397565">+1 (202) 439-7565</a></li>
+        <li><a href="https://github.com/Evan0x" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/evanyibole" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </header>
+
+    <section id="work">
+      <div class="section-head reveal">
+        <h2 class="section-title">Selected work</h2>
+        <p class="section-note">Three things worth opening</p>
+      </div>
+
+      <article class="feature reveal">
+        <div>
+          <div class="eyebrow">
+            <span class="num">01</span>
+            <span class="when">October 2026 · Wajo Hackathon</span>
+          </div>
+          <h3>AveLoop</h3>
+          <p class="org">Remote · San Francisco</p>
+        </div>
+        <div>
+          <p class="lede">A discharge plan a voice agent can actually carry out.</p>
+          <p class="prose">I joined remotely and built the parser, the review screen, and the connection to Fo. A note or a photo becomes medications, follow-ups, and warning signs. The person confirms the dates before anything moves on.</p>
+          <p class="prose">Once the plan is approved, Fo — an AI voice agent, reached through its MCP — can set medicine reminders, confirm a clinic, call the pharmacy or the clinic, and read the plan aloud.</p>
+          <p class="stack">Next.js · React · TypeScript · Clerk · Supabase · Gemini · Google Cloud TTS</p>
+          <a class="text-link" href="https://aveloop.vercel.app/" target="_blank" rel="noopener">aveloop.vercel.app</a>
+        </div>
+      </article>
+
+      <div class="project-grid">
+        <article class="card project reveal">
+          <div class="eyebrow">
+            <span class="num">02</span>
+            <span class="when">April 2026</span>
+          </div>
+          <h3>AvelaMed <span class="badge">Honorable Mention</span></h3>
+          <p class="org">AugieHack · Health track</p>
+          <p class="lede">A healthcare app shipped inside a hackathon.</p>
+          <p class="prose">Honorable mention for a multi-page patient and results flow. I contributed to the backend and the core workflows, and worked with the team on the interface.</p>
+          <p class="stack">JavaScript · React · Node.js · Express · Supabase · Gemini · Clerk</p>
+          <a class="text-link" href="https://avelamed.vercel.app/" target="_blank" rel="noopener">Live demo</a>
+        </article>
+
+        <article class="card project reveal">
+          <div class="eyebrow">
+            <span class="num">03</span>
+            <span class="when">January 2026</span>
+          </div>
+          <h3>Study Planner</h3>
+          <p class="org">Personal project</p>
+          <p class="lede">A planner for classes, tasks, and goals.</p>
+          <p class="prose">Password login through bcrypt, or Google through Passport, with sessions guarding the authenticated routes. Planner data stays in the browser, gets sanitized on the way in, and duplicate entries are dropped.</p>
+          <p class="stack">JavaScript · Node.js · Express · MongoDB · Passport.js</p>
+          <a class="text-link" href="https://github.com/Evan0x/study-planner" target="_blank" rel="noopener">GitHub</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="section-head reveal">
+        <h2 class="section-title">Experience</h2>
+        <p class="section-note">Internship, then a shop I ran</p>
+      </div>
+
+      <article class="entry reveal">
+        <p class="entry-date">May — Aug 2026<br>Remote</p>
+        <div>
+          <h3 class="role-title">Software Engineering Intern</h3>
+          <p class="org">Knobull</p>
+          <p class="lede">Search and embeddings for an AI course-recommendation platform.</p>
+          <p class="prose">On the frontend I added ARIA labels to navigation and forms and put in breakpoints so the layout holds on a phone. On the data side I wrote a Python pipeline that chunks course text, embeds it with a local SentenceTransformer, and stores the vectors in Supabase.</p>
+          <p class="prose">The search API mixes that semantic index with full-text search using reciprocal rank fusion, served from Express with a locally hosted Hugging Face embedding model.</p>
+          <p class="stack">React · TypeScript · Node.js · Python · Supabase · pgvector · REST</p>
+          <a class="text-link" href="https://www.knobull.com/" target="_blank" rel="noopener">knobull.com</a>
+        </div>
+      </article>
+
+      <article class="entry reveal">
+        <p class="entry-date">Feb 2023 — May 2025</p>
+        <div>
+          <h3 class="role-title">Co-Founder &amp; Operations Lead</h3>
+          <p class="org">Keta</p>
+          <p class="lede">An online clothing shop for young people in Mongolia, run for two years.</p>
+          <p class="prose">We sourced from China and fulfilled about twenty orders a month, around $600 in monthly revenue. I ran purchasing, inventory, and shipping between China and Mongolia, and a three-person team covering customer service, Instagram, and delivery.</p>
+        </div>
+      </article>
+    </section>
+
+    <section id="about">
+      <div class="section-head reveal">
+        <h2 class="section-title">About</h2>
+        <p class="section-note">School, and what I use</p>
+      </div>
+
+      <div class="about-grid reveal">
+        <div>
+          <h3>Education</h3>
+          <p>B.S. in Computer Science at George Mason University, Fairfax. In progress, expected May 2029.</p>
+          <p class="meta">GPA 3.82 / 4.0</p>
+          <p class="meta">Coursework: object-oriented programming, discrete mathematics, data structures and algorithms, web programming, and AI Engineering 301 through CodePath.</p>
+        </div>
+        <div>
+          <h3>Around campus</h3>
+          <ul class="activities">
+            <li>Google Developer Student Club</li>
+            <li>Game Development Club</li>
+            <li>LeetCode Club</li>
+            <li>InterVarsity</li>
+          </ul>
+        </div>
+      </div>
+
+      <dl class="skills reveal">
+        <div>
+          <dt>Languages</dt>
+          <dd>JavaScript, TypeScript, Python, SQL, HTML/CSS, Java</dd>
+        </div>
+        <div>
+          <dt>Frameworks &amp; libraries</dt>
+          <dd>React, Next.js, Node.js, Express, Passport.js, sentence-transformers</dd>
+        </div>
+        <div>
+          <dt>Databases</dt>
+          <dd>Supabase with pgvector, PostgreSQL, MongoDB</dd>
+        </div>
+        <div>
+          <dt>Tools</dt>
+          <dd>Git, GitHub, REST APIs, Vercel, bcrypt, OAuth, AWS, Gemini API, MCP</dd>
+        </div>
+      </dl>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>Evan Yibole · fyibole@gmu.edu</span>
+    <a href="#top">Back to top</a>
+  </div>
+</footer>
+
+<script>
+  const progress = document.getElementById("progress");
+  function updateProgress() {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    progress.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + "%";
+  }
+  document.addEventListener("scroll", updateProgress, { passive: true });
+  updateProgress();
+
+  const reveals = document.querySelectorAll(".reveal");
+  if (document.documentElement.classList.contains("js")) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (!entry.isIntersecting) return;
+        setTimeout(() => entry.target.classList.add("visible"), i * 40);
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.08 });
+    reveals.forEach((el) => revealObserver.observe(el));
+    setTimeout(() => {
+      reveals.forEach((el) => el.classList.add("visible"));
+    }, 900);
+  }
+
+  const navLinks = document.querySelectorAll(".nav a");
+  const sections = ["work", "experience", "about"].map((id) => document.getElementById(id));
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const id = entry.target.id;
+      navLinks.forEach((link) => {
+        const on = link.getAttribute("href") === "#" + id;
+        if (on) link.setAttribute("aria-current", "true");
+        else link.removeAttribute("aria-current");
+      });
+    });
+  }, { rootMargin: "-40% 0px -50% 0px" });
+  sections.forEach((section) => navObserver.observe(section));
+</script>
+</body>
+</html>

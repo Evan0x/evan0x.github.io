@@ -1,4 +1,5 @@
 import React from 'react';
+import { ProfilePortrait } from './components/ProfilePortrait.jsx';
 import { Projects } from './components/Projects.jsx';
 
 const skills = [
@@ -39,9 +40,7 @@ function App() {
           </div>
           <div className="hero-art">
             <div className="orbit orbit-one" /><div className="orbit orbit-two" /><div className="orbit orbit-three" />
-            <div className="portrait">
-              <img src="/images/evan-yibole.jpg" alt="Portrait of Evan Yibole" width={800} height={800} decoding="async" fetchPriority="high" />
-            </div>
+            <ProfilePortrait />
             <div className="art-caption"><span className="caption-line" /> BUILD · LEARN · REPEAT</div>
             <div className="art-index">FIG. 001<br />IN PROGRESS</div>
           </div>

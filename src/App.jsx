@@ -36,7 +36,7 @@ function App() {
               <a className="button button-primary" href="#work">Explore my work <Arrow /></a>
               <a className="button button-quiet" href="https://github.com/Evan0x" target="_blank" rel="noreferrer">GitHub <Arrow diagonal /></a>
             </div>
-            <div className="hero-meta"><span>BA / BS · COMPUTER SCIENCE</span><span>EXPECTED 2029</span></div>
+            <div className="hero-meta"><span>BS · COMPUTER SCIENCE</span><span>EXPECTED 2029</span></div>
           </div>
           <div className="hero-art">
             <div className="orbit orbit-one" /><div className="orbit orbit-two" /><div className="orbit orbit-three" />

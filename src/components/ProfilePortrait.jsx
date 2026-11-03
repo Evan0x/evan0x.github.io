@@ -20,7 +20,7 @@ export function ProfilePortrait() {
       onClick={revealOnTap}
     >
       <span className="portrait-veil" aria-hidden="true">
-        <span className="portrait-initials">EV</span>
+        <span className="portrait-initials">EY</span>
         <span className="portrait-hint portrait-hint--hover">Hover to meet me</span>
         <span className="portrait-hint portrait-hint--touch">Tap to meet me</span>
       </span>

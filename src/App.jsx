@@ -4,10 +4,10 @@ import { Projects } from './components/Projects.jsx';
 
 const skills = [
   ['01', 'Languages', 'Java · Python · JavaScript · TypeScript · SQL'],
-  ['02', 'Backend', 'Spring Boot · Node.js · Express · REST APIs'],
-  ['03', 'Frontend', 'React · HTML · CSS'],
-  ['04', 'Data & AI', 'PostgreSQL · Supabase · pgvector · Pandas'],
-  ['05', 'Cloud & Tools', 'AWS · Docker · Git · GitHub']
+  ['02', 'Backend', 'Spring Boot · Spring MVC · Maven · Node.js · Express · REST APIs · PDFBox'],
+  ['03', 'Frontend', 'React · Next.js · HTML · CSS'],
+  ['04', 'Data & AI', 'PostgreSQL · Supabase · pgvector · Gemini · LLM APIs · Pandas'],
+  ['05', 'Cloud & Tools', 'AWS EC2 · Amazon ECR · Docker · Clerk · Google Cloud Text-to-Speech · Git · GitHub']
 ];
 
 function Arrow({ diagonal = false }) {

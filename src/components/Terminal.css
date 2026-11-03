@@ -1,0 +1,122 @@
+.term-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-terminal);
+  display: grid;
+  place-items: center;
+  padding: calc(var(--nav-h) + 0.75rem) var(--content-pad) 1.25rem;
+  background: rgba(4, 6, 15, 0.62);
+}
+
+.term {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  width: min(46rem, 100%);
+  height: min(34rem, calc(100svh - var(--nav-h) - 2rem));
+  border: 1px solid var(--line);
+  background: #070914;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.5);
+}
+
+.term-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+  background: rgba(12, 16, 32, 0.85);
+}
+
+.term-bar .kicker {
+  margin: 0;
+  text-transform: none;
+  letter-spacing: 0.12em;
+}
+
+.term-close {
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--line-strong);
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: var(--text-kicker);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.term-close:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+.term-body {
+  overflow: auto;
+  padding: 0.9rem 1rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.65;
+  cursor: text;
+}
+
+.term-banner,
+.term-line {
+  margin: 0;
+  color: var(--text-dim);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: inherit;
+}
+
+.term-banner {
+  margin-bottom: 0.85rem;
+  color: var(--cyan);
+}
+
+.term-line--in {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: baseline;
+  color: var(--text);
+}
+
+.term-prompt {
+  color: var(--violet);
+  flex: none;
+}
+
+.term-input {
+  flex: 1 1 12rem;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  caret-color: var(--cyan);
+  outline: none;
+}
+
+.term-hint {
+  margin: 0.15rem 0 0;
+  color: var(--text-faint);
+}
+
+@media (max-width: 640px) {
+  .term-scrim {
+    padding: calc(var(--nav-h) + 0.4rem) 0.65rem 0.65rem;
+  }
+
+  .term {
+    height: min(38rem, calc(100svh - var(--nav-h) - 1rem));
+  }
+
+  .term-input {
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .term-scrim {
+    background: rgba(4, 6, 15, 0.82);
+  }
+}

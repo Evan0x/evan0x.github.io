@@ -1,10 +1,12 @@
 import { profile } from '../data/site.js';
 import { m, useMotionPrefs } from '../motion/MotionProvider.jsx';
+import { useSystems } from '../systems/SystemsContext.jsx';
 import { Constellation } from './Constellation.jsx';
 import './Hero.css';
 
 export function Hero() {
   const prefs = useMotionPrefs();
+  const { openPalette, openTerminal, shortcut } = useSystems();
   const enter = prefs.reveal
     ? {
         initial: { opacity: 0, y: prefs.mobile ? 8 : 14 },
@@ -30,6 +32,14 @@ export function Hero() {
             <p className="hero-name">{profile.name}</p>
             <p>{profile.role}</p>
             <p>{profile.focus}</p>
+          </div>
+          <div className="hero-launch">
+            <button type="button" className="hero-launch-btn" onClick={openTerminal}>
+              Open terminal
+            </button>
+            <button type="button" className="hero-launch-btn" onClick={openPalette}>
+              Command <span>{shortcut}</span>
+            </button>
           </div>
         </m.header>
         <Constellation />

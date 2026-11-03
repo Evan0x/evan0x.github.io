@@ -9,7 +9,7 @@ export function Contact() {
   return (
     <Section
       id="channel"
-      index="05"
+      index="06"
       kicker="Channel"
       title="Open a channel."
       aside="A project, a role, or a question about how a system should behave."

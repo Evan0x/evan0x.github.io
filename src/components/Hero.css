@@ -66,6 +66,33 @@
   letter-spacing: -0.03em;
 }
 
+.hero-launch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: var(--space-lg);
+}
+
+.hero-launch-btn {
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--line-strong);
+  font-family: var(--font-mono);
+  font-size: var(--text-kicker);
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.hero-launch-btn span {
+  margin-left: 0.45rem;
+  color: var(--cyan);
+}
+
+.hero-launch-btn:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
 .hero .constellation {
   grid-area: map;
 }

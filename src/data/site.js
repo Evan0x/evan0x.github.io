@@ -17,7 +17,8 @@ export const navigation = [
   { id: 'work', index: '02', label: 'Work' },
   { id: 'record', index: '03', label: 'Record' },
   { id: 'stack', index: '04', label: 'Stack' },
-  { id: 'channel', index: '05', label: 'Channel', emphasis: true },
+  { id: 'source', index: '05', label: 'Source' },
+  { id: 'channel', index: '06', label: 'Channel', emphasis: true },
 ];
 
 export const constellation = {
@@ -104,6 +105,7 @@ export const projects = [
     ],
     width: 1024,
     height: 665,
+    studyHref: '#study/syllacal',
     primary: {
       href: 'https://github.com/Evan0x/SyllaCal',
       label: 'View SyllaCal on GitHub',
@@ -150,6 +152,7 @@ export const projects = [
     ],
     width: 1024,
     height: 665,
+    studyHref: '#study/avelamed',
     primary: {
       href: 'https://avelamed.vercel.app/',
       label: 'Open the Avelamed live site',
@@ -200,6 +203,7 @@ export const projects = [
     ],
     width: 1024,
     height: 665,
+    studyHref: '#study/aveloop',
     primary: {
       href: 'https://aveloop.vercel.app/',
       label: 'Open the AveLoop live site',
@@ -208,6 +212,43 @@ export const projects = [
       { label: 'Live site', href: 'https://aveloop.vercel.app/' },
       { label: 'GitHub', href: 'https://github.com/Evan0x/AveLoop' },
     ],
+  },
+  {
+    id: 'hangman',
+    number: '04',
+    name: 'Hangman',
+    layout: 'game',
+    category: 'Browser Game / JavaScript',
+    description:
+      'A vanilla hangman board: one word bank, a length-based difficulty, and six SVG body parts.',
+    problem:
+      'Keep the guessed set, the miss count, and two input devices in sync without a framework or a server.',
+    stack: ['HTML', 'CSS', 'JavaScript'],
+    frames: [],
+    pipeline: [
+      { label: 'Bank', detail: '602 words · 8 categories' },
+      { label: 'Filter', detail: 'Easy ≤7 · hard >10' },
+      { label: 'Guess', detail: 'Click or keydown' },
+      { label: 'Gallows', detail: 'Six misses' },
+    ],
+    decisions: [
+      {
+        title: 'One bank, three windows',
+        text: 'Difficulty filters WORD_BANK by letter count after spaces are removed. Empty filters fall back to the full list instead of crashing.',
+      },
+      {
+        title: 'One guess function',
+        text: 'On-screen keys and physical a–z keys call handleGuess. Repeats and post-game input are ignored. Spaces in a phrase are not letters to guess.',
+      },
+    ],
+    width: 1024,
+    height: 665,
+    studyHref: '#study/hangman',
+    primary: {
+      href: 'https://github.com/Evan0x/hangman',
+      label: 'View Hangman on GitHub',
+    },
+    links: [{ label: 'GitHub', href: 'https://github.com/Evan0x/hangman' }],
   },
 ];
 

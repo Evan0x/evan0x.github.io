@@ -41,5 +41,7 @@
   --z-atmosphere: 0;
   --z-content: 1;
   --z-nav: 20;
+  --z-terminal: 45;
+  --z-palette: 50;
   color-scheme: dark;
 }

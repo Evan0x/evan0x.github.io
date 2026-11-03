@@ -6,8 +6,8 @@ export function Boot({ children }) {
   const prefs = useMotionPrefs();
 
   useEffect(() => {
-    if (!window.location.hash) return;
     const id = window.location.hash;
+    if (!id || id.startsWith('#study/')) return;
     const timer = window.setTimeout(() => {
       scrollToHash(id, { reduced: prefs.reduced });
     }, 40);

@@ -7,7 +7,8 @@
 }
 
 .bay + .bay,
-.lab-pair {
+.lab-pair,
+.lab-pair + .bay {
   margin-top: var(--space-lg);
 }
 
@@ -28,6 +29,69 @@
   background:
     radial-gradient(ellipse at 88% 8%, rgba(139, 108, 255, 0.1), transparent 38%),
     linear-gradient(180deg, rgba(12, 14, 30, 0.72), rgba(6, 8, 18, 0.28));
+}
+
+.bay--game {
+  background:
+    radial-gradient(ellipse at 8% 12%, rgba(196, 178, 255, 0.1), transparent 42%),
+    linear-gradient(180deg, rgba(12, 14, 28, 0.72), rgba(6, 8, 18, 0.28));
+}
+
+.lab-study {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.62rem 0.8rem;
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  font-family: var(--font-mono);
+  font-size: var(--text-kicker);
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.lab-study:hover {
+  background: rgba(126, 231, 240, 0.08);
+  color: var(--text);
+}
+
+.hang-board {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  min-height: 14rem;
+  padding: 1.25rem 1.35rem;
+  color: var(--violet);
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(139, 108, 255, 0.16), transparent 48%),
+    #10131f;
+}
+
+.hang-gallows {
+  width: 8.5rem;
+  height: auto;
+}
+
+.hang-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.hang-row span {
+  display: grid;
+  place-items: center;
+  width: 1.55rem;
+  height: 2rem;
+  border-bottom: 1px solid var(--line-strong);
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+}
+
+.hang-row span.is-up {
+  color: var(--text);
 }
 
 .lab-copy h3 {
@@ -282,6 +346,11 @@
 }
 
 @media (max-width: 720px) {
+  .hang-board {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
   .bay,
   .bay--primary {
     padding: var(--space-lg) var(--space-md);

@@ -3,17 +3,29 @@ import { syllacalArchitecture } from '../data/syllacalArchitecture.js';
 import { m, useMotionPrefs } from '../motion/MotionProvider.jsx';
 import './Architecture.css';
 
-export function Architecture() {
+export function Architecture({
+  nodes = syllacalArchitecture,
+  kicker = 'Path through the system',
+  index = '01',
+  lede = 'A PDF goes in. A calendar file comes out. Click a stage to see what that step actually does.',
+  embedded = false,
+}) {
   const prefs = useMotionPrefs();
-  const [activeId, setActiveId] = useState(syllacalArchitecture[0].id);
+  const [activeId, setActiveId] = useState(nodes[0].id);
   const [fromKeys, setFromKeys] = useState(false);
   const labelId = useId();
   const panelId = useId();
   const listRef = useRef(null);
   const panelRef = useRef(null);
-  const activeIndex = syllacalArchitecture.findIndex((node) => node.id === activeId);
-  const active = syllacalArchitecture[activeIndex];
-  const total = String(syllacalArchitecture.length).padStart(2, '0');
+  const activeIndex = Math.max(0, nodes.findIndex((node) => node.id === activeId));
+  const active = nodes[activeIndex] ?? nodes[0];
+  const total = String(nodes.length).padStart(2, '0');
+
+  useEffect(() => {
+    if (!nodes.some((node) => node.id === activeId)) {
+      setActiveId(nodes[0].id);
+    }
+  }, [nodes, activeId]);
 
   useEffect(() => {
     if (!fromKeys || !listRef.current) return;
@@ -37,23 +49,21 @@ export function Architecture() {
     if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
     event.preventDefault();
     const next = event.key === 'ArrowDown'
-      ? Math.min(activeIndex + 1, syllacalArchitecture.length - 1)
+      ? Math.min(activeIndex + 1, nodes.length - 1)
       : Math.max(activeIndex - 1, 0);
-    select(syllacalArchitecture[next].id, { keyboard: true });
+    select(nodes[next].id, { keyboard: true });
   }
 
   return (
-    <div className="arch">
+    <div className={embedded ? 'arch arch--embedded' : 'arch'}>
       <p className="kicker" id={labelId}>
-        <span className="kicker-index">01</span>
-        Path through the system
+        <span className="kicker-index">{index}</span>
+        {kicker}
       </p>
-      <p className="arch-lede">
-        A PDF goes in. A calendar file comes out. Click a stage to see what that step actually does.
-      </p>
+      {lede ? <p className="arch-lede">{lede}</p> : null}
       <div className="arch-layout">
         <ol className="arch-flow" aria-labelledby={labelId} ref={listRef}>
-          {syllacalArchitecture.map((node, index) => {
+          {nodes.map((node, index) => {
             const selected = node.id === activeId;
             const reached = index <= activeIndex;
             const step = String(index + 1).padStart(2, '0');

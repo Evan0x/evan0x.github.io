@@ -1,0 +1,118 @@
+.portrait {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: min(46%, 232px);
+  aspect-ratio: 1;
+  padding: 0;
+  border: 1px solid rgba(196, 178, 255, 0.55);
+  border-radius: 50%;
+  overflow: hidden;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 35% 28%, rgba(126, 231, 240, 0.16), transparent 42%),
+    radial-gradient(circle at 50% 60%, #1a1630, #090b14 72%);
+  box-shadow:
+    0 0 0 1px rgba(8, 10, 20, 0.8),
+    0 0 42px var(--glow-violet);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: border-color 0.45s ease, box-shadow 0.45s ease;
+}
+
+.portrait-veil {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  transition: opacity 0.45s ease;
+}
+
+.portrait-initials {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-indent: 0.14em;
+}
+
+.portrait-hint {
+  color: rgba(232, 228, 248, 0.72);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.portrait-hint--touch {
+  display: none;
+}
+
+.portrait-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  opacity: 0;
+  transform: scale(1.04);
+  filter: blur(10px);
+  transition: opacity 0.5s ease, filter 0.5s ease, transform 0.5s ease;
+}
+
+.portrait:hover,
+.portrait:focus-visible,
+.portrait.is-revealed {
+  border-color: rgba(126, 231, 240, 0.85);
+  box-shadow:
+    0 0 0 1px rgba(126, 231, 240, 0.25),
+    0 0 46px var(--glow-cyan);
+}
+
+.portrait:hover .portrait-photo,
+.portrait:focus-visible .portrait-photo,
+.portrait.is-revealed .portrait-photo {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
+}
+
+.portrait:hover .portrait-veil,
+.portrait:focus-visible .portrait-veil,
+.portrait.is-revealed .portrait-veil {
+  opacity: 0;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .portrait-hint--hover {
+    display: none;
+  }
+
+  .portrait-hint--touch {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait,
+  .portrait-veil,
+  .portrait-photo {
+    transition: none;
+  }
+
+  .portrait-photo {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+
+  .portrait-veil {
+    display: none;
+  }
+}

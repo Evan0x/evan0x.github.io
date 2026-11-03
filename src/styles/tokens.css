@@ -1,0 +1,45 @@
+:root {
+  --bg: #060814;
+  --bg-deep: #04060f;
+  --bg-raised: #0c1020;
+  --text: #eeeaf8;
+  --text-dim: #b7b3c6;
+  --text-faint: #8e8aa0;
+  --line: rgba(190, 204, 255, 0.14);
+  --line-strong: rgba(190, 204, 255, 0.32);
+  --violet: #c4b2ff;
+  --violet-hot: #8b6cff;
+  --cyan: #7ee7f0;
+  --cyan-deep: #3ecad6;
+  --glow-violet: rgba(139, 108, 255, 0.28);
+  --glow-cyan: rgba(126, 231, 240, 0.22);
+
+  --font-display: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  --font-sans: "Instrument Sans", "Avenir Next", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", ui-monospace, monospace;
+
+  --text-kicker: 0.68rem;
+  --text-small: 0.92rem;
+  --text-body: 1.02rem;
+  --text-title: clamp(2.6rem, 5vw, 4.35rem);
+  --text-display: clamp(4.5rem, 12vw, 8.75rem);
+  --leading-body: 1.75;
+  --tracking-meta: 0.16em;
+
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6.25rem;
+
+  --measure: 70rem;
+  --nav-h: 4.25rem;
+  --content-pad: 1.5rem;
+
+  --z-atmosphere: 0;
+  --z-content: 1;
+  --z-nav: 20;
+  color-scheme: dark;
+}

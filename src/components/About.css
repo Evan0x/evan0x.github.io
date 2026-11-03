@@ -1,0 +1,13 @@
+.notes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl) var(--space-2xl);
+  max-width: 68rem;
+}
+
+@media (max-width: 760px) {
+  .notes {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+}

@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { navigation } from '../data/site.js';
+import { useMotionPrefs } from '../motion/MotionProvider.jsx';
+import { onHashClick } from '../motion/scroll.js';
 import './Navigation.css';
 
 const SECTION_IDS = navigation.map((item) => item.id);
 
 export function Navigation() {
+  const prefs = useMotionPrefs();
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('');
   const primary = navigation.filter((item) => !item.emphasis);
@@ -12,19 +15,29 @@ export function Navigation() {
 
   useEffect(() => {
     const nodes = SECTION_IDS.map((id) => document.getElementById(id)).filter(Boolean);
+    let frame = 0;
 
-    function onScroll() {
+    function measure() {
+      frame = 0;
       const mark = window.innerHeight * 0.32;
       let current = '';
       for (const node of nodes) {
         if (node.getBoundingClientRect().top <= mark) current = node.id;
       }
-      setActive(current);
+      setActive((prev) => (prev === current ? prev : current));
     }
 
-    onScroll();
+    function onScroll() {
+      if (frame) return;
+      frame = window.requestAnimationFrame(measure);
+    }
+
+    measure();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   useEffect(() => {
@@ -49,10 +62,14 @@ export function Navigation() {
     setOpen(false);
   }
 
+  function go(event, href) {
+    onHashClick(event, href, prefs.reduced, close);
+  }
+
   return (
     <header className={open ? 'nav is-open' : 'nav'}>
       <div className="wrap nav-bar">
-        <a className="wordmark" href="#index" onClick={close}>
+        <a className="wordmark" href="#index" onClick={(event) => go(event, '#index')}>
           Evan <span>/ Systems</span>
         </a>
         <nav className="nav-links" id="primary-navigation" aria-label="Primary">
@@ -61,7 +78,7 @@ export function Navigation() {
               key={item.id}
               href={`#${item.id}`}
               aria-current={active === item.id ? 'location' : undefined}
-              onClick={close}
+              onClick={(event) => go(event, `#${item.id}`)}
             >
               <span>{item.index}</span>
               {item.label}
@@ -71,7 +88,7 @@ export function Navigation() {
             className="nav-channel nav-channel--menu"
             href={`#${channel.id}`}
             aria-current={active === channel.id ? 'location' : undefined}
-            onClick={close}
+            onClick={(event) => go(event, `#${channel.id}`)}
           >
             <span>{channel.index}</span>
             {channel.label}
@@ -81,6 +98,7 @@ export function Navigation() {
           className="nav-channel nav-channel--bar"
           href={`#${channel.id}`}
           aria-current={active === channel.id ? 'location' : undefined}
+          onClick={(event) => go(event, `#${channel.id}`)}
         >
           {channel.label}
         </a>

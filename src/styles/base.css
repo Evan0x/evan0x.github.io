@@ -123,6 +123,13 @@ p {
   background: var(--cyan);
   box-shadow: 0 0 12px var(--cyan);
   flex: none;
+  animation: pulse-dot 2.8s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  50% {
+    box-shadow: 0 0 18px var(--cyan);
+  }
 }
 
 .prose {
@@ -198,5 +205,9 @@ p {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .status-dot {
+    animation: none;
   }
 }

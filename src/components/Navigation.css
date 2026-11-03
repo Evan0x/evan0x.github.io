@@ -45,6 +45,7 @@
   letter-spacing: 0.14em;
   line-height: 1;
   text-transform: uppercase;
+  transition: color 0.2s ease;
 }
 
 .nav-links a span {
@@ -133,5 +134,11 @@
 
   .nav-channel--menu {
     display: flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-links a {
+    transition: none;
   }
 }

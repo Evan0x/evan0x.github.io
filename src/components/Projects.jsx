@@ -1,6 +1,7 @@
 import { useId, useState } from 'react';
 import { Architecture } from './Architecture.jsx';
 import { projects } from '../data/site.js';
+import { m, revealProps, useMotionPrefs } from '../motion/MotionProvider.jsx';
 import { Section } from './Section.jsx';
 import './Projects.css';
 
@@ -125,11 +126,25 @@ function Copy({ project }) {
   );
 }
 
+function BayShell({ project, className, children }) {
+  const prefs = useMotionPrefs();
+  return (
+    <m.article
+      className={className}
+      id={project.id}
+      {...revealProps(prefs)}
+      whileHover={prefs.lift ? { y: -5, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } } : undefined}
+    >
+      {children}
+    </m.article>
+  );
+}
+
 function PrimaryBay({ project }) {
   const [hero, ...rest] = project.frames;
 
   return (
-    <article className="bay bay--primary" id={project.id}>
+    <BayShell project={project} className="bay bay--primary">
       <Copy project={project} />
       <div className="lab-stage">
         <Frame frame={hero} width={project.width} height={project.height} featured />
@@ -141,14 +156,13 @@ function PrimaryBay({ project }) {
       </div>
       <Architecture />
       <Bench project={project} showPipeline={false} />
-
-    </article>
+    </BayShell>
   );
 }
 
 function SideBay({ project }) {
   return (
-    <article className={`bay bay--${project.layout}`} id={project.id}>
+    <BayShell project={project} className={`bay bay--${project.layout}`}>
       <Frame
         frame={project.frames[0]}
         width={project.width}
@@ -157,7 +171,7 @@ function SideBay({ project }) {
       />
       <Copy project={project} />
       <Bench project={project} />
-    </article>
+    </BayShell>
   );
 }
 

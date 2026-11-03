@@ -1,8 +1,11 @@
 import { skills } from '../data/site.js';
+import { itemReveal, listReveal, m, useMotionPrefs } from '../motion/MotionProvider.jsx';
 import { Section } from './Section.jsx';
 import './Toolkit.css';
 
 export function Toolkit() {
+  const prefs = useMotionPrefs();
+
   return (
     <Section
       id="stack"
@@ -11,9 +14,9 @@ export function Toolkit() {
       title="Operating set."
       aside="The languages and services in use. Listed, not scored."
     >
-      <div className="racks">
+      <m.div className="racks" {...listReveal(prefs)}>
         {skills.map((rack) => (
-          <div className="rack" key={rack.index}>
+          <m.div className="rack" key={rack.index} {...itemReveal(prefs)}>
             <p className="rack-index">{rack.index}</p>
             <h3>{rack.title}</h3>
             <ul>
@@ -21,9 +24,9 @@ export function Toolkit() {
                 <li key={item}>{item}</li>
               ))}
             </ul>
-          </div>
+          </m.div>
         ))}
-      </div>
+      </m.div>
     </Section>
   );
 }

@@ -1,8 +1,11 @@
 import { education, experience } from '../data/site.js';
+import { itemReveal, listReveal, m, revealProps, useMotionPrefs } from '../motion/MotionProvider.jsx';
 import { Section } from './Section.jsx';
 import './Experience.css';
 
 export function Experience() {
+  const prefs = useMotionPrefs();
+
   return (
     <Section
       id="record"
@@ -12,7 +15,7 @@ export function Experience() {
       aside="One internship already finished. The degree is still underway."
     >
       <div className="entries">
-        <article className="entry" id={experience.id}>
+        <m.article className="entry" id={experience.id} {...revealProps(prefs)}>
           <div className="entry-when">
             <p>{experience.when}</p>
             <p>{experience.place}</p>
@@ -21,21 +24,21 @@ export function Experience() {
             <h3>{experience.role}</h3>
             <p className="entry-org">{experience.org}</p>
             <p className="prose">{experience.summary}</p>
-            <ul className="workstreams">
+            <m.ul className="workstreams" {...listReveal(prefs)}>
               {experience.work.map((item) => (
-                <li key={item.index}>
+                <m.li key={item.index} {...itemReveal(prefs)}>
                   <span>{item.index}</span>
                   <strong>{item.label}</strong>
                   <span>{item.text}</span>
-                </li>
+                </m.li>
               ))}
-            </ul>
+            </m.ul>
             <a className="text-link" href={experience.href} target="_blank" rel="noreferrer">
               {experience.linkLabel} <span aria-hidden="true">↗</span>
             </a>
           </div>
-        </article>
-        <article className="entry">
+        </m.article>
+        <m.article className="entry" {...revealProps(prefs, 0.08)}>
           <div className="entry-when">
             <p>{education.when}</p>
             <p>{education.place}</p>
@@ -45,7 +48,7 @@ export function Experience() {
             <p className="entry-org">{education.org}</p>
             <p className="prose">{education.summary}</p>
           </div>
-        </article>
+        </m.article>
       </div>
     </Section>
   );

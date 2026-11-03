@@ -80,6 +80,7 @@
     0 0 0 8px rgba(126, 231, 240, 0.08),
     0 0 16px currentColor;
   transition: transform 0.28s ease, box-shadow 0.28s ease;
+  animation: node-breathe 3.8s ease-in-out infinite;
 }
 
 .star--violet {
@@ -183,6 +184,14 @@
   }
 }
 
+@keyframes node-breathe {
+  50% {
+    box-shadow:
+      0 0 0 11px rgba(126, 231, 240, 0.14),
+      0 0 22px currentColor;
+  }
+}
+
 @media (max-width: 760px) {
   .constellation {
     min-height: 28rem;
@@ -194,6 +203,11 @@
 
   .star-subject {
     font-size: 0.8rem;
+  }
+
+  .star-core,
+  .constellation-link {
+    animation: none;
   }
 }
 

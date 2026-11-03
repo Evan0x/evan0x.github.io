@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { constellation } from '../data/site.js';
+import { m, useMotionPrefs } from '../motion/MotionProvider.jsx';
+import { onHashClick } from '../motion/scroll.js';
 import './Constellation.css';
 
 const FINE_POINTER = '(hover: hover) and (pointer: fine)';
@@ -21,6 +23,7 @@ function useNarrow() {
 
 export function Constellation() {
   const field = useRef(null);
+  const prefs = useMotionPrefs();
   const narrow = useNarrow();
   const [active, setActive] = useState(null);
   const [cursor, setCursor] = useState(false);
@@ -51,7 +54,7 @@ export function Constellation() {
     const box = field.current.getBoundingClientRect();
     field.current.style.setProperty('--mx', `${((event.clientX - box.left) / box.width) * 100}%`);
     field.current.style.setProperty('--my', `${((event.clientY - box.top) / box.height) * 100}%`);
-    setCursor(true);
+    setCursor((on) => (on ? on : true));
   }
 
   function onPointerLeave() {
@@ -60,12 +63,15 @@ export function Constellation() {
   }
 
   return (
-    <div
+    <m.div
       ref={field}
       className={cursor ? 'constellation has-cursor' : 'constellation'}
       style={{ '--map-w': layout.width, '--map-h': layout.height }}
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
+      initial={prefs.reveal ? { opacity: 0 } : false}
+      animate={{ opacity: 1 }}
+      transition={{ duration: prefs.mobile ? 0.3 : 0.55, delay: prefs.mobile ? 0 : 0.12, ease: [0.22, 1, 0.36, 1] }}
     >
       <svg
         className="constellation-map"
@@ -89,29 +95,37 @@ export function Constellation() {
         })}
       </svg>
       <nav className="constellation-nodes" aria-label="Systems map">
-        {constellation.nodes.map((node) => {
+        {constellation.nodes.map((node, index) => {
           const { x, y, place } = point(node);
           const hot = active === node.id;
           const near = active && neighbors[node.id].has(active);
           return (
-            <a
+            <m.a
               key={node.id}
               className={`star star--${node.tone} star--${place}${hot ? ' is-active' : ''}${near ? ' is-near' : ''}`}
               href={node.href}
               style={{ '--x': `${(x / layout.width) * 100}%`, '--y': `${(y / layout.height) * 100}%` }}
+              initial={prefs.reveal ? { opacity: 0 } : false}
+              animate={{ opacity: 1 }}
+              transition={{
+                duration: 0.4,
+                delay: prefs.mobile || !prefs.reveal ? 0 : 0.18 + index * 0.05,
+                ease: [0.22, 1, 0.36, 1],
+              }}
               onPointerEnter={() => setActive(node.id)}
               onFocus={() => setActive(node.id)}
               onBlur={() => setActive(null)}
+              onClick={(event) => onHashClick(event, node.href, prefs.reduced)}
             >
               <span className="star-core" aria-hidden="true" />
               <span className="star-copy">
                 <span className="star-label">{node.label}</span>
                 <span className="star-subject">{node.subject}</span>
               </span>
-            </a>
+            </m.a>
           );
         })}
       </nav>
-    </div>
+    </m.div>
   );
 }

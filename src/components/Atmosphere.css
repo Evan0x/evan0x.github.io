@@ -17,6 +17,13 @@
     linear-gradient(to bottom, rgba(176, 196, 255, 0.045) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image: radial-gradient(ellipse at 50% 20%, #000 15%, transparent 72%);
+  animation: grid-drift 80s linear infinite;
+}
+
+@keyframes grid-drift {
+  to {
+    background-position: 72px 72px;
+  }
 }
 
 .atmosphere-light {
@@ -37,4 +44,10 @@
   right: -18vw;
   bottom: -20vw;
   background: radial-gradient(circle, rgba(62, 202, 214, 0.12), transparent 70%);
+}
+
+@media (max-width: 760px), (prefers-reduced-motion: reduce) {
+  .atmosphere-grid {
+    animation: none;
+  }
 }

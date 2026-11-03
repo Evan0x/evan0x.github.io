@@ -74,6 +74,20 @@
   border-radius: 50%;
   border: 1px solid rgba(126, 231, 240, 0.55);
   background: rgba(126, 231, 240, 0.18);
+  animation: interest-breathe 3.8s ease-in-out infinite;
+}
+
+@keyframes interest-breathe {
+  50% {
+    background: rgba(126, 231, 240, 0.38);
+    box-shadow: 0 0 10px var(--glow-cyan);
+  }
+}
+
+@media (max-width: 760px), (prefers-reduced-motion: reduce) {
+  .interest-orb {
+    animation: none;
+  }
 }
 
 .interest-index {

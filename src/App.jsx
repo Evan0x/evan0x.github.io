@@ -7,23 +7,29 @@ import { Hero } from './components/Hero.jsx';
 import { Navigation } from './components/Navigation.jsx';
 import { Projects } from './components/Projects.jsx';
 import { Toolkit } from './components/Toolkit.jsx';
+import { Boot } from './motion/Boot.jsx';
+import { MotionProvider } from './motion/MotionProvider.jsx';
 
 function App() {
   return (
-    <div className="site">
-      <a className="skip-link" href="#content">Skip to content</a>
-      <Atmosphere />
-      <Navigation />
-      <main className="site-main" id="content">
-        <Hero />
-        <About />
-        <Projects />
-        <Experience />
-        <Toolkit />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <MotionProvider>
+      <Boot>
+        <div className="site">
+          <a className="skip-link" href="#content">Skip to content</a>
+          <Atmosphere />
+          <Navigation />
+          <main className="site-main" id="content">
+            <Hero />
+            <About />
+            <Projects />
+            <Experience />
+            <Toolkit />
+            <Contact />
+          </main>
+          <Footer />
+        </div>
+      </Boot>
+    </MotionProvider>
   );
 }
 

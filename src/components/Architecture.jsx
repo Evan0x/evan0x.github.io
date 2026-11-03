@@ -1,8 +1,10 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { syllacalArchitecture } from '../data/syllacalArchitecture.js';
+import { m, useMotionPrefs } from '../motion/MotionProvider.jsx';
 import './Architecture.css';
 
 export function Architecture() {
+  const prefs = useMotionPrefs();
   const [activeId, setActiveId] = useState(syllacalArchitecture[0].id);
   const [fromKeys, setFromKeys] = useState(false);
   const labelId = useId();
@@ -24,10 +26,9 @@ export function Architecture() {
     setFromKeys(keyboard);
     setActiveId(id);
     if (!keyboard && window.matchMedia('(max-width: 860px)').matches) {
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       panelRef.current?.scrollIntoView({
         block: 'nearest',
-        behavior: reduce ? 'auto' : 'smooth',
+        behavior: prefs.reduced ? 'auto' : 'smooth',
       });
     }
   }
@@ -82,33 +83,40 @@ export function Architecture() {
           })}
         </ol>
         <aside className="arch-panel" id={panelId} aria-live="polite" ref={panelRef}>
-          <p className="kicker">
-            <span className="kicker-index">{String(activeIndex + 1).padStart(2, '0')}</span>
-            {active.label}
-          </p>
-          <p className="arch-plain">{active.plain}</p>
-          <dl className="arch-facts">
-            <div>
-              <dt>Responsibility</dt>
-              <dd>{active.responsibility}</dd>
-            </div>
-            <div>
-              <dt>Technology</dt>
-              <dd>{active.technology}</dd>
-            </div>
-            <div>
-              <dt>Engineering decision</dt>
-              <dd>{active.decision}</dd>
-            </div>
-          </dl>
-          {active.snippet ? (
-            <pre className="arch-code">
-              <code>{active.snippet}</code>
-            </pre>
-          ) : null}
-          <a className="text-link" href={active.source.href} target="_blank" rel="noreferrer">
-            {active.source.file} <span aria-hidden="true">↗</span>
-          </a>
+          <m.div
+            key={activeId}
+            initial={prefs.reveal ? { opacity: 0 } : false}
+            animate={{ opacity: 1 }}
+            transition={{ duration: prefs.reduced ? 0 : 0.22 }}
+          >
+            <p className="kicker">
+              <span className="kicker-index">{String(activeIndex + 1).padStart(2, '0')}</span>
+              {active.label}
+            </p>
+            <p className="arch-plain">{active.plain}</p>
+            <dl className="arch-facts">
+              <div>
+                <dt>Responsibility</dt>
+                <dd>{active.responsibility}</dd>
+              </div>
+              <div>
+                <dt>Technology</dt>
+                <dd>{active.technology}</dd>
+              </div>
+              <div>
+                <dt>Engineering decision</dt>
+                <dd>{active.decision}</dd>
+              </div>
+            </dl>
+            {active.snippet ? (
+              <pre className="arch-code">
+                <code>{active.snippet}</code>
+              </pre>
+            ) : null}
+            <a className="text-link" href={active.source.href} target="_blank" rel="noreferrer">
+              {active.source.file} <span aria-hidden="true">↗</span>
+            </a>
+          </m.div>
         </aside>
       </div>
     </div>

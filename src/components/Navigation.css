@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   z-index: var(--z-nav);
-  background: rgba(6, 8, 20, 0.78);
+  background: rgba(6, 8, 16, 0.94);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);

@@ -120,6 +120,7 @@
 
 .gh-controls select {
   min-width: 11rem;
+  min-height: 2.75rem;
   padding: 0.55rem 0.7rem;
   border: 1px solid var(--line-strong);
   background: transparent;
@@ -267,6 +268,7 @@
 
 .gh-retry {
   margin-top: 0.75rem;
+  min-height: 2.75rem;
   padding: 0.7rem 0.85rem;
   border: 1px solid var(--line-strong);
   font-family: var(--font-mono);
@@ -337,6 +339,49 @@
   .gh-activity a {
     grid-template-columns: 1fr;
     gap: 0.25rem;
+  }
+
+  .gh-controls {
+    width: 100%;
+  }
+
+  .gh-controls label,
+  .gh-controls select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .gh-controls select {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .gh-profile {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .gh-avatar,
+  .gh-skel-avatar {
+    width: 3.25rem;
+    height: 3.25rem;
+  }
+
+  .gh-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .gh-stats dd {
+    font-size: 1.25rem;
+  }
+
+  .gh-profile-copy p + p {
+    font-size: 1.25rem;
+  }
+
+  .gh-panel {
+    padding: 0.9rem;
   }
 }
 

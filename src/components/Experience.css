@@ -84,11 +84,27 @@
     gap: var(--space-sm);
   }
 
+  .entry h3 {
+    font-size: clamp(1.55rem, 8vw, 2.1rem);
+  }
+
   .workstreams li {
     grid-template-columns: 2.1rem minmax(0, 1fr);
+    padding: 0.75rem 0.85rem;
   }
 
   .workstreams li span:last-child {
     grid-column: 2;
+  }
+}
+
+@media (max-width: 420px) {
+  .workstreams li {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .workstreams li span:last-child {
+    grid-column: 1;
   }
 }

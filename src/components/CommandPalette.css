@@ -102,12 +102,29 @@
 
 @media (max-width: 640px) {
   .palette-scrim {
-    padding-top: calc(var(--nav-h) + 0.75rem);
+    padding: calc(var(--nav-h) + env(safe-area-inset-top, 0px) + 0.5rem) 0.65rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    place-items: stretch;
+  }
+
+  .palette {
+    width: 100%;
+    max-height: calc(100svh - var(--nav-h) - env(safe-area-inset-top, 0px) - 1.25rem);
+    overflow: auto;
+    padding: 0.9rem 0.85rem 0.7rem;
+  }
+
+  .palette-input {
+    font-size: 1rem;
   }
 
   .palette-item {
     grid-template-columns: minmax(0, 1fr);
     gap: 0.2rem;
+    min-height: 2.75rem;
+  }
+
+  .palette-hint {
+    display: none;
   }
 }
 

@@ -102,4 +102,12 @@
     grid-template-columns: 1fr;
     gap: var(--space-xl);
   }
+
+  .dossier-id {
+    padding: 1.1rem 1.05rem 1.2rem;
+  }
+
+  .dossier-id h3 {
+    font-size: clamp(1.85rem, 9vw, 2.6rem);
+  }
 }

@@ -90,6 +90,10 @@
 }
 
 @media (hover: none), (pointer: coarse) {
+  .portrait {
+    width: min(52%, 196px);
+  }
+
   .portrait-hint--hover {
     display: none;
   }

@@ -23,6 +23,7 @@
   grid-template-columns: minmax(15rem, 19rem) minmax(0, 1fr);
   gap: clamp(1.5rem, 4vw, 3rem);
   align-items: start;
+  min-width: 0;
 }
 
 .arch-flow {
@@ -75,6 +76,7 @@
   gap: 0.55rem;
   align-items: center;
   width: 100%;
+  min-height: 2.75rem;
   padding: 0.7rem 0.85rem 0.7rem 0.7rem;
   border: 1px solid var(--line);
   background: rgba(6, 8, 18, 0.45);
@@ -186,6 +188,8 @@
   margin: 0 0 var(--space-lg);
   padding: 0.9rem 1rem;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
   border: 1px solid var(--line);
   background: #070914;
   color: #d7e8ea;
@@ -216,12 +220,33 @@
 
 @media (max-width: 860px) {
   .arch-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .arch-panel {
     min-height: 0;
     position: static;
+    padding: 1rem;
+  }
+
+  .arch-plain {
+    font-size: 1.15rem;
+  }
+
+  .arch-code {
+    max-height: 12rem;
+    font-size: 0.68rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .arch {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+  }
+
+  .arch-code {
+    display: none;
   }
 }
 

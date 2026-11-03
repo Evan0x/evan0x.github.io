@@ -34,11 +34,13 @@ export function Hero() {
             <p>{profile.focus}</p>
           </div>
           <div className="hero-launch">
-            <button type="button" className="hero-launch-btn" onClick={openTerminal}>
-              Open terminal
-            </button>
+            {prefs.mobile ? null : (
+              <button type="button" className="hero-launch-btn" onClick={openTerminal}>
+                Open terminal
+              </button>
+            )}
             <button type="button" className="hero-launch-btn" onClick={openPalette}>
-              Command <span>{shortcut}</span>
+              {prefs.mobile ? 'Jump to a section' : <>Command <span>{shortcut}</span></>}
             </button>
           </div>
         </m.header>

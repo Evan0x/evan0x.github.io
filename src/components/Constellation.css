@@ -13,6 +13,12 @@
   touch-action: manipulation;
 }
 
+.constellation--index {
+  min-height: 0;
+  aspect-ratio: auto;
+  overflow: visible;
+}
+
 .constellation::before {
   content: "";
   position: absolute;
@@ -193,21 +199,67 @@
 }
 
 @media (max-width: 760px) {
-  .constellation {
-    min-height: 28rem;
+  .constellation--index {
+    min-height: 0;
+    aspect-ratio: auto;
+    overflow: visible;
+    display: grid;
   }
 
-  .star-label {
-    letter-spacing: 0.1em;
+  .constellation-item {
+    display: grid;
+    grid-template-columns: 0.9rem minmax(0, 1fr) auto;
+    gap: 0.75rem;
+    align-items: center;
+    min-height: 3.4rem;
+    padding: 0.9rem 1rem;
+    color: inherit;
+    text-align: left;
   }
 
-  .star-subject {
-    font-size: 0.8rem;
+  .constellation-item + .constellation-item {
+    border-top: 1px solid var(--line);
   }
 
-  .star-core,
-  .constellation-link {
+  .constellation-item .star-core {
+    width: 0.55rem;
+    height: 0.55rem;
     animation: none;
+    box-shadow: 0 0 10px currentColor;
+  }
+
+  .constellation-item--violet {
+    color: var(--violet);
+  }
+
+  .constellation-item--cyan {
+    color: var(--cyan);
+  }
+
+  .constellation-item-copy {
+    min-width: 0;
+  }
+
+  .constellation-item .star-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+  }
+
+  .constellation-item .star-subject {
+    margin-top: 0.12rem;
+    color: var(--text);
+    font-size: 0.95rem;
+  }
+
+  .constellation-item-go {
+    color: var(--cyan);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+  }
+
+  .constellation-item:hover .star-subject,
+  .constellation-item:focus-visible .star-subject {
+    color: var(--text);
   }
 }
 

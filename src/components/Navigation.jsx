@@ -41,8 +41,19 @@ export function Navigation() {
   }, []);
 
   useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [open]);
+
+  useEffect(() => {
     function onKey(event) {
       if (event.key === 'Escape') setOpen(false);
+    }
+
+    function onHash() {
+      setOpen(false);
     }
 
     const desktop = window.matchMedia('(min-width: 861px)');
@@ -51,9 +62,11 @@ export function Navigation() {
     }
 
     window.addEventListener('keydown', onKey);
+    window.addEventListener('hashchange', onHash);
     desktop.addEventListener('change', onDesktop);
     return () => {
       window.removeEventListener('keydown', onKey);
+      window.removeEventListener('hashchange', onHash);
       desktop.removeEventListener('change', onDesktop);
     };
   }, []);
@@ -112,6 +125,9 @@ export function Navigation() {
           {open ? 'Close' : 'Menu'}
         </button>
       </div>
+      {open ? (
+        <button type="button" className="nav-scrim" aria-label="Close menu" onClick={close} />
+      ) : null}
     </header>
   );
 }

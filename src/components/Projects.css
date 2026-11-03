@@ -40,6 +40,7 @@
 .lab-study {
   display: inline-flex;
   align-items: center;
+  min-height: 2.75rem;
   padding: 0.62rem 0.8rem;
   border: 1px solid var(--cyan);
   color: var(--cyan);
@@ -152,23 +153,18 @@
 .lab-frame {
   margin: 0;
   border: 1px solid var(--line);
-  background: var(--bg-raised);
+  background: #10131f;
   overflow: hidden;
   transition: border-color 0.28s ease;
 }
 
 .lab-frame img {
+  display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 1024 / 665;
-  object-fit: cover;
+  object-fit: contain;
   object-position: top center;
   background: #10131f;
-  transition: transform 0.5s ease;
-}
-
-.bay--primary .lab-frame.is-featured img {
-  max-height: min(28rem, 58vh);
 }
 
 .lab-frame figcaption {
@@ -250,6 +246,7 @@
 
 .lab-toggle {
   margin-left: auto;
+  min-height: 2.75rem;
   padding: 0.7rem 0.85rem;
   border: 1px solid var(--line-strong);
   font-family: var(--font-mono);
@@ -341,7 +338,7 @@
 
   .lab-bench,
   .lab-pair {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -349,29 +346,54 @@
   .hang-board {
     grid-template-columns: 1fr;
     justify-items: start;
+    min-height: 0;
+    padding: 1rem;
+  }
+
+  .hang-gallows {
+    width: 6.5rem;
   }
 
   .bay,
   .bay--primary {
-    padding: var(--space-lg) var(--space-md);
+    padding: 1.15rem 1rem;
+  }
+
+  .lab-copy h3 {
+    font-size: clamp(1.75rem, 8.5vw, 2.4rem);
+  }
+
+  .lab-problem {
+    font-size: 1.1rem;
   }
 
   .lab-strip,
   .lab-pipe {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .lab-frame figcaption {
     flex-direction: column;
     gap: 0.25rem;
+    padding: 0.65rem 0.75rem 0.75rem;
   }
 
   .lab-frame figcaption span:last-child {
     text-align: left;
   }
 
-  .lab-toggle {
+  .lab-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+  }
+
+  .lab-study,
+  .lab-toggle,
+  .lab-actions .text-link {
     margin-left: 0;
+    justify-content: center;
+    width: 100%;
   }
 }
 
@@ -386,7 +408,7 @@
   }
 
   .lab-frame:hover img {
-    transform: scale(1.03);
+    transform: none;
   }
 }
 

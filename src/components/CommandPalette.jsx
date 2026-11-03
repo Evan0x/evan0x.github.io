@@ -119,7 +119,7 @@ export function CommandPalette() {
             {...motion.panel}
           >
             <p className="kicker" id="palette-title">
-              <span className="kicker-index">{shortcut}</span>
+              <span className="kicker-index">{prefs.mobile ? 'Go' : shortcut}</span>
               Command center
             </p>
             <input
@@ -161,7 +161,7 @@ export function CommandPalette() {
               )}
             </ul>
             <p className="palette-foot" aria-live="polite">
-              {notice || '↑↓ to move · Enter to run · Esc to close'}
+              {notice || (prefs.mobile ? 'Tap a command to run it' : '↑↓ to move · Enter to run · Esc to close')}
             </p>
           </m.div>
         </m.div>

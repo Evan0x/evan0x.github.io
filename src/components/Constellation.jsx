@@ -8,7 +8,9 @@ const FINE_POINTER = '(hover: hover) and (pointer: fine)';
 const NARROW = '(max-width: 760px)';
 
 function useNarrow() {
-  const [narrow, setNarrow] = useState(false);
+  const [narrow, setNarrow] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia(NARROW).matches : false
+  );
 
   useEffect(() => {
     const media = window.matchMedia(NARROW);
@@ -60,6 +62,36 @@ export function Constellation() {
   function onPointerLeave() {
     setCursor(false);
     setActive(null);
+  }
+
+  if (narrow) {
+    return (
+      <m.nav
+        className="constellation constellation--index"
+        aria-label="Systems map"
+        initial={prefs.reveal ? { opacity: 0 } : false}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {constellation.nodes.map((node) => (
+          <a
+            key={node.id}
+            className={`constellation-item constellation-item--${node.tone}`}
+            href={node.href}
+            onClick={(event) => onHashClick(event, node.href, prefs.reduced)}
+          >
+            <span className="star-core" aria-hidden="true" />
+            <span className="constellation-item-copy">
+              <span className="star-label">{node.label}</span>
+              <span className="star-subject">{node.subject}</span>
+            </span>
+            <span className="constellation-item-go" aria-hidden="true">
+              →
+            </span>
+          </a>
+        ))}
+      </m.nav>
+    );
   }
 
   return (

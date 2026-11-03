@@ -51,7 +51,9 @@
 
 @media (max-width: 720px) {
   .rack {
-    grid-template-columns: 2.5rem minmax(0, 1fr);
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    gap: var(--space-sm);
+    padding: 0.9rem;
   }
 
   .rack ul {

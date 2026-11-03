@@ -136,6 +136,7 @@
 }
 
 .study-api-tabs button {
+  min-height: 2.75rem;
   padding: 0.45rem 0.7rem;
   border: 1px solid var(--line);
   color: var(--text-faint);
@@ -175,7 +176,7 @@
 
 .study-api-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 0.75rem;
   margin: var(--space-lg) 0;
 }
@@ -199,6 +200,7 @@
   margin: 0;
   padding: 0.85rem;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
   border: 1px solid var(--line);
   background: rgba(4, 6, 16, 0.72);
   color: var(--text-dim);
@@ -206,6 +208,7 @@
   font-size: 0.72rem;
   line-height: 1.55;
   white-space: pre;
+  max-width: 100%;
 }
 
 .study-flow-track {
@@ -223,6 +226,7 @@
 
 .study-flow-track button {
   width: 100%;
+  min-height: 2.75rem;
   padding: 0.75rem 0.8rem;
   border: 1px solid var(--line);
   background: rgba(6, 8, 18, 0.45);
@@ -287,6 +291,7 @@
   flex-wrap: wrap;
   gap: 0.55rem 0.9rem;
   align-items: baseline;
+  min-height: 2.75rem;
   text-align: left;
 }
 
@@ -300,7 +305,7 @@
 
 .study-compare-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 0.75rem;
   margin-top: var(--space-md);
 }
@@ -325,17 +330,49 @@
   .study-layout,
   .study-api-grid,
   .study-compare-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .study-toc {
-    position: static;
+    position: sticky;
+    top: calc(var(--nav-h) + env(safe-area-inset-top, 0px));
+    z-index: 8;
+    margin: 0 calc(var(--content-pad) * -1) var(--space-lg);
+    padding: 0.55rem var(--content-pad) 0.65rem;
+    background: rgba(6, 8, 16, 0.94);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .study-toc .kicker {
+    display: none;
   }
 
   .study-toc ol {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 1rem;
+    display: flex;
+    gap: 0.45rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.2rem;
+  }
+
+  .study-toc li {
+    flex: none;
+  }
+
+  .study-toc a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 2.75rem;
+    padding: 0.45rem 0.7rem;
+    border: 1px solid var(--line);
+    white-space: nowrap;
+  }
+
+  .study-flow-track {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -344,8 +381,13 @@
     padding-top: var(--space-xl);
   }
 
-  .study-toc ol {
-    grid-template-columns: 1fr;
+  .study-hero h1 {
+    font-size: clamp(2.1rem, 11vw, 3.2rem);
+  }
+
+  .study-code,
+  .study-snippet {
+    font-size: 0.68rem;
   }
 }
 

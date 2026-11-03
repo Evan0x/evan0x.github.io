@@ -37,9 +37,11 @@ function App() {
             </div>
             <div className="hero-meta"><span>BA / BS · COMPUTER SCIENCE</span><span>EXPECTED 2029</span></div>
           </div>
-          <div className="hero-art" aria-label="Abstract orbital graphic">
+          <div className="hero-art">
             <div className="orbit orbit-one" /><div className="orbit orbit-two" /><div className="orbit orbit-three" />
-            <div className="planet"><span>EY</span></div>
+            <div className="portrait">
+              <img src="/images/evan-yibole.jpg" alt="Portrait of Evan Yibole" width={800} height={800} decoding="async" fetchPriority="high" />
+            </div>
             <div className="art-caption"><span className="caption-line" /> BUILD · LEARN · REPEAT</div>
             <div className="art-index">FIG. 001<br />IN PROGRESS</div>
           </div>

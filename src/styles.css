@@ -59,3 +59,8 @@
   .project-shot img,.feature-project,.billboard-project,.agent-project,.project-actions a{transition:none}
   .feature-project:hover .project-shot img,.billboard-project:hover .project-shot img,.agent-project:hover .project-shot img{transform:none}
 }
+
+.portrait{width:252px;height:252px;border-radius:50%;overflow:hidden;position:relative;z-index:1;border:1px solid rgba(189,168,255,.55);box-shadow:0 0 72px rgba(149,106,255,.32),0 16px 36px rgba(0,0,0,.4)}
+.portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 22%}
+@media(max-width:800px){.portrait{width:168px;height:168px}}
+@media(max-width:480px){.portrait{width:148px;height:148px}}

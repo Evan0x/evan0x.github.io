@@ -211,18 +211,34 @@ export const projects = [
   },
 ];
 
+export const about = {
+  name: 'Evan Yibole',
+  role: 'Computer Science student at George Mason University.',
+  expected: 'Expected graduation · 2029',
+  interests: [
+    'Backend engineering',
+    'Full-stack development',
+    'AI engineering',
+    'Cloud infrastructure',
+    'Software architecture',
+  ],
+};
+
 export const experience = {
   id: 'knobull',
-  when: 'May — Aug 2026',
+  when: 'May — August 2026',
   place: 'Remote',
   role: 'Software Engineering Intern',
   org: 'Knobull Software',
   summary:
-    'Contributed to an AI-powered course discovery platform using React, TypeScript, Node.js, Python, and Supabase.',
-  points: [
-    'Built responsive and accessible interface improvements.',
-    'Worked on Python text chunking and embedding workflows with Supabase pgvector.',
-    'Consolidated backend API behavior, contributing to a reported 15% latency reduction.',
+    'Worked on an AI-powered course discovery platform using React, TypeScript, Node.js, Python, and Supabase.',
+  work: [
+    { index: '01', label: 'React / TypeScript', text: 'Interface development.' },
+    { index: '02', label: 'Accessible UI', text: 'Accessibility and responsive layout.' },
+    { index: '03', label: 'Node.js / Python', text: 'Application work on both runtimes.' },
+    { index: '04', label: 'Retrieval', text: 'Embedding and semantic search workflows.' },
+    { index: '05', label: 'Supabase / pgvector', text: 'Data and vector search.' },
+    { index: '06', label: 'API', text: 'Backend API improvements.' },
   ],
   href: 'https://www.knobull.com/',
   linkLabel: 'Visit Knobull',
@@ -234,15 +250,15 @@ export const education = {
   role: 'George Mason University',
   org: 'BS · Computer Science',
   summary:
-    'Building a strong foundation in computer science while exploring software engineering, data structures, algorithms, and cloud technologies.',
+    'The degree is underway. The same layers show up here: systems, software, and how the pieces connect.',
 };
 
 export const skills = [
-  ['01', 'Languages', 'Java · Python · JavaScript · TypeScript · SQL'],
-  ['02', 'Backend', 'Spring Boot · Spring MVC · Maven · Node.js · Express · REST APIs · PDFBox'],
-  ['03', 'Frontend', 'React · Next.js · HTML · CSS'],
-  ['04', 'Data & AI', 'PostgreSQL · Supabase · pgvector · Gemini · LLM APIs · Pandas'],
-  ['05', 'Cloud & Tools', 'AWS EC2 · Amazon ECR · Docker · Clerk · Google Cloud Text-to-Speech · Git · GitHub'],
+  { index: '01', title: 'Languages', items: ['Java', 'Python', 'JavaScript', 'TypeScript', 'SQL'] },
+  { index: '02', title: 'Backend', items: ['Spring Boot', 'Node.js', 'Express', 'REST APIs'] },
+  { index: '03', title: 'Frontend', items: ['React', 'HTML', 'CSS'] },
+  { index: '04', title: 'Database and AI', items: ['PostgreSQL', 'Supabase', 'pgvector', 'Gemini API'] },
+  { index: '05', title: 'Tools', items: ['Git', 'GitHub', 'Docker', 'AWS'] },
 ];
 
 export const channels = [

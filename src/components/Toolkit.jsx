@@ -9,14 +9,18 @@ export function Toolkit() {
       index="04"
       kicker="Stack"
       title="Operating set."
-      aside="Languages, services, and the tools around the work."
+      aside="The languages and services in use. Listed, not scored."
     >
-      <div className="stack">
-        {skills.map(([index, title, detail]) => (
-          <div className="stack-row" key={index}>
-            <p>{index}</p>
-            <h3>{title}</h3>
-            <p>{detail}</p>
+      <div className="racks">
+        {skills.map((rack) => (
+          <div className="rack" key={rack.index}>
+            <p className="rack-index">{rack.index}</p>
+            <h3>{rack.title}</h3>
+            <ul>
+              {rack.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>
